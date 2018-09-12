@@ -1,0 +1,30 @@
+@media screen and (max-width: 992px){
+    .mobile-hide{
+        display: none;
+    }
+    .mobile-block{
+        display: block;
+    }
+    .topper{
+        .header{
+            height: 50px;
+            top: 15px;
+        }
+        &-content{
+            height: calc(100% - 75px);
+            .container{
+                max-width: 100%;
+            }
+        }
+        &-slider{
+            .slide{
+                .slide-caption{
+                    font-size: 26px;
+                }
+                .slide-img{
+                    max-width: 250px;
+                }
+            }
+        }
+    }
+}

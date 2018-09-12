@@ -1,0 +1,117 @@
+@font-face {
+    font-family: 'acme';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Acme Regular'), url('../fonts/Acme-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'gilroy-bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gilroy ExtraBold'), url('../fonts/gilroy.ttf') format('truetype'), url('../fonts/gilroy.otf') format('opentype');
+}
+@font-face {
+    font-family: 'gilroy';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gilroy Light'), url('../fonts/Gilroy-Light.otf') format('opentype'), url('../fonts/Gilroy-Light.ttf') format('truetype');
+}
+
+body{
+	margin: 0;
+	padding: 0;
+    min-height: 320px;
+}
+
+button{
+	cursor: pointer;
+
+}
+
+.accent{
+    color: #B00000;
+}
+
+.media-button{
+    padding: 7px 14px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-family: acme;
+    font-size: 13px;
+    color: #fff;
+    background-color: transparent;
+    transition: background-color .25s, box-shadow .25s;
+    position: relative;
+    z-index: 110;
+    overflow: hidden;
+    &::after{
+        position: absolute;
+        content: '';
+        transform: scaleX(.01) translateX(50%) translateY(100%);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,.3);
+        z-index: -2;
+        transition: transform .25s, border-radius .25s;
+        border-radius: 50%;
+    }
+    &::before{
+        position: absolute;
+        content: '';
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #B00000;
+        z-index: -2;
+    }
+    &:hover{
+        text-decoration: none;
+        color: #fff;
+        box-shadow:  0px 3px 5px rgba(0,0,0,0.39);
+        &::after{
+            transform: scaleX(1) translateY(0);
+            border-radius: 0;
+        }
+    }
+    &:active{
+        &::after{
+            background-color: rgba(83,83,83,.3);
+        }
+    }
+    >.fa{
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+.tal{
+    text-align: left !important;
+}
+
+.tac{
+    text-align: center !important;
+}
+
+.button-sc{
+    &::before{
+        background-color: #f30;
+    }
+}
+.button-bc{
+    &::before{
+        background-color: #629AA9;
+    }
+}
+
+.mobile-block{
+    display: none;
+}
+
+@import "sections/_topper.scss";
+@import "sections/_follow.scss";
+@import "mobile/_large.scss";
+@import "mobile/_medium.scss";
+@import "mobile/_small.scss";
