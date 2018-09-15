@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('.topper-slider .slide').css('display', 'flex');
     $('.topper-slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,

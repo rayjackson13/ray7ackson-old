@@ -34,7 +34,7 @@ gulp.task('serve', ['sass'], function() {
         server: ['./', './src']
     });
 
-    gulp.watch(["./src/sass/*.sass", "./src/sass/**/*.sass", "./src/sass/sections/*.sass", "node_modules/bootstrap/scss/bootstrap.scss"], ['sass']);
+    gulp.watch(["./src/sass/*.scss", "./src/sass/**/*.scss", "./src/sass/sections/*.scss", "node_modules/bootstrap/scss/bootstrap.scss"], ['sass']);
     gulp.watch(['src/js/*.js'], ['js']);
     gulp.watch([ 'src/babel/*.js' ], [ 'babel' ]).on('change', browserSync.reload);
     gulp.watch(["./src/*.html"], ['htmlbeautify']).on('change', browserSync.reload);
@@ -42,7 +42,7 @@ gulp.task('serve', ['sass'], function() {
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    return gulp.src(["./src/sass/*.sass", "./src/sass/**/*.sass", "./src/sass/sections/*.sass", "node_modules/bootstrap/scss/bootstrap.scss"])
+    return gulp.src(["./src/sass/*.scss", "./src/sass/**/*.scss", "./src/sass/sections/*.scss", "node_modules/bootstrap/scss/bootstrap.scss"])
         .pipe(sass())
          .pipe(autoprefixer({
              browsers: ['last 2 versions'],

@@ -28,7 +28,7 @@ button {
   color: #B00000; }
 
 .media-button {
-  padding: 7px 14px;
+  padding: 10px 14px;
   border-radius: 2px;
   text-transform: uppercase;
   font-family: acme;
@@ -37,7 +37,6 @@ button {
   background-color: transparent;
   -webkit-transition: background-color .25s, -webkit-box-shadow .25s;
   transition: background-color .25s, -webkit-box-shadow .25s;
-  -o-transition: background-color .25s, box-shadow .25s;
   transition: background-color .25s, box-shadow .25s;
   transition: background-color .25s, box-shadow .25s, -webkit-box-shadow .25s;
   position: relative;
@@ -47,7 +46,6 @@ button {
     position: absolute;
     content: '';
     -webkit-transform: scaleX(0.01) translateX(50%) translateY(100%);
-    -ms-transform: scaleX(0.01) translateX(50%) translateY(100%);
     transform: scaleX(0.01) translateX(50%) translateY(100%);
     top: 0;
     left: 0;
@@ -57,7 +55,6 @@ button {
     z-index: -2;
     -webkit-transition: border-radius .25s, -webkit-transform .25s;
     transition: border-radius .25s, -webkit-transform .25s;
-    -o-transition: transform .25s, border-radius .25s;
     transition: transform .25s, border-radius .25s;
     transition: transform .25s, border-radius .25s, -webkit-transform .25s;
     border-radius: 50%; }
@@ -77,7 +74,6 @@ button {
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.39); }
     .media-button:hover::after {
       -webkit-transform: scaleX(1) translateY(0);
-      -ms-transform: scaleX(1) translateY(0);
       transform: scaleX(1) translateY(0);
       border-radius: 0; }
   .media-button:active::after {
@@ -132,7 +128,6 @@ button {
         opacity: .2;
         font-size: 26px;
         -webkit-transition: opacity .125s, background-color .125s;
-        -o-transition: opacity .125s, background-color .125s;
         transition: opacity .125s, background-color .125s; }
         .topper .header .social-link_item:hover {
           opacity: 1; }
@@ -191,7 +186,6 @@ button {
             background-color: #7d7d7d;
             border: 0;
             -webkit-transition: background-color .125s;
-            -o-transition: background-color .125s;
             transition: background-color .125s;
             content: '';
             width: 12px;
@@ -216,7 +210,6 @@ button {
     border: 0;
     -webkit-transition: -webkit-box-shadow .25s;
     transition: -webkit-box-shadow .25s;
-    -o-transition: box-shadow .25s;
     transition: box-shadow .25s;
     transition: box-shadow .25s, -webkit-box-shadow .25s;
     display: -webkit-box;
@@ -238,7 +231,6 @@ button {
       background-size: cover;
       opacity: .6;
       -webkit-transition: opacity .25s;
-      -o-transition: opacity .25s;
       transition: opacity .25s; }
     .topper .arrow:hover {
       -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19);
@@ -252,7 +244,6 @@ button {
       outline: none; }
     .topper .arrow-left {
       -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
       transform: rotate(180deg); }
       .topper .arrow-left:hover {
         -webkit-box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.19);
@@ -281,7 +272,8 @@ button {
       overflow: hidden;
       display: -webkit-box;
       display: -ms-flexbox;
-      display: flex; }
+      display: flex;
+      display: none; }
       .topper-slider .slide .slide-left {
         overflow: hidden; }
       .topper-slider .slide .slide-right {
@@ -366,7 +358,6 @@ button {
         opacity: .2;
         font-size: 22px;
         -webkit-transition: opacity .125s, background-color .125s;
-        -o-transition: opacity .125s, background-color .125s;
         transition: opacity .125s, background-color .125s; }
         .header-follow .navbar .social-link_item:hover {
           opacity: 1; }
