@@ -5,9 +5,9 @@
     src: local('Acme Regular'), url('../fonts/Acme-Regular.ttf') format('truetype');
 }
 @font-face {
-    font-family: 'gilroy-bold';
+    font-family: 'gilroy';
     font-style: normal;
-    font-weight: normal;
+    font-weight: 800;
     src: local('Gilroy ExtraBold'), url('../fonts/gilroy.ttf') format('truetype'), url('../fonts/gilroy.otf') format('opentype');
 }
 @font-face {
@@ -110,8 +110,9 @@ button{
     display: none;
 }
 
-@import "sections/_topper.scss";
-@import "sections/_follow.scss";
+@import "sections/topper";
+@import "sections/follow";
+@import "sections/about";
 @import "mobile/_large.scss";
 @import "mobile/_medium.scss";
 @import "mobile/_small.scss";
