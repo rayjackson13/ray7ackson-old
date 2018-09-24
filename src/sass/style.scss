@@ -1,3 +1,6 @@
+$screen-xs: screen and (max-width: 575px);
+$screen-sm: screen and (max-width: 767px);
+
 @font-face {
     font-family: 'acme';
     font-style: normal;
@@ -33,6 +36,7 @@ button{
 }
 
 .media-button{
+    display: inline-block;
     padding: 10px 14px;
     border-radius: 2px;
     text-transform: uppercase;
@@ -113,6 +117,7 @@ button{
 @import "sections/topper";
 @import "sections/follow";
 @import "sections/about";
+@import "sections/music";
 @import "mobile/_large.scss";
 @import "mobile/_medium.scss";
 @import "mobile/_small.scss";

@@ -1,26 +1,36 @@
 .about {
-    padding: 100px 0;
+    padding: 100px 0 50px;
+    background-color: #424242;
+
+    @media #{$screen-sm} {
+        padding: 50px 0 25px;
+        
+    }
 
     &-top {
         margin-bottom: 50px;
     }
 
     &-img {
-        width: 400px;
-        height: 400px;
-        display: inline-block;
+        width: 100%;
+        padding-bottom: 100%;
         background-image: url(../img/me.jpg);
         background-size: cover;
         background-position: center;
-        border-radius: 10px;
-        margin-right: 40px;
-        vertical-align: middle;
+        border-radius: 25px;
+        box-shadow: 2px 1px 10px rgba(0,0,0,.35);
+
+        @media #{$screen-sm} {
+            width: 200px;
+            height: 200px;
+            padding-bottom: 0;
+            margin: 0 auto 20px;
+            
+        }
     }
 
     &-content {
-        display: inline-block;
-        width: calc(100% - 450px);
-        vertical-align: middle;
+        color: #ffffff;
 
         &-title {
             font-size: 36px;
@@ -28,6 +38,10 @@
             font-family: 'Gilroy', sans-serif;
             font-weight: 800;
             margin-bottom: 5px;
+            @media #{$screen-sm} {
+                font-size: 24px;
+                line-height: 28px;
+            }
         }
 
         &-caption {
@@ -36,13 +50,27 @@
             font-family: 'Gilroy', sans-serif;
             font-weight: normal;
             margin-bottom: 60px;
+            @media #{$screen-sm} {
+                font-size: 20px;
+                line-height: 22px;
+                margin-bottom: 30px;
+            }
         }
 
         &-text {
             font-size: 20px;
             line-height: 24px;
             font-family: 'Gilroy', sans-serif;
-            margin-bottom: 40px;
+            margin-bottom: 10px;
+
+            @media #{$screen-sm} {
+                font-size: 16px;
+                line-height: 18px;
+            }
+
+            &.margin {
+                margin-bottom: 40px;
+            }
 
             &:last-child {
                 margin-bottom: 0;
