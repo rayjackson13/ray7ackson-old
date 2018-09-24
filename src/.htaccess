@@ -1,0 +1,7 @@
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^rayjackson\.tk$ [NC]
+RewriteRule ^(.*)$ https://www.rayjackson.tk/$1 [R=301,L]
+
+RewriteCond %{SERVER_PORT} !^443$ 
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [QSA,R=301,L]
