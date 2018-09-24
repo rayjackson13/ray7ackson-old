@@ -3,10 +3,22 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="Ray Jackson">
+    <meta property="og:url" content="https://www.rayjackson.tk">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Vocalist, Front-End developer and personal callboy.">
+    <meta property="og:image" content="https://www.rayjackson.tk/img/me.jpg">
 
     <title>Ray Jackson</title>
 
@@ -16,6 +28,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126329991-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-126329991-1');
+    </script>
+
 </head>
 
 
@@ -27,15 +50,15 @@
 
                 <div class="" id="navbarsExampleDefault">
                     <ul class="social ml-auto">
-                        <li class="social-link"><a href="https://rayjackson.bandcamp.com/" target="_blank" class="social-link_item"><i class="fa fa-bandcamp"></i></a>
+                        <li class="social-link"><a href="https://rayjackson.bandcamp.com/" target="_blank" class="social-link_item" data-link="bandcamp"><i class="fa fa-bandcamp"></i></a>
                         </li>
-                        <li class="social-link"><a href="https://soundcloud.com/rayjackson13" target="_blank" class="social-link_item"><i class="fa fa-soundcloud"></i></a>
+                        <li class="social-link"><a href="https://soundcloud.com/rayjackson13" target="_blank" class="social-link_item" data-link="soundcloud"><i class="fa fa-soundcloud"></i></a>
                         </li>
-                        <li class="social-link"><a href="https://vk.com/jakeminor" target="_blank" class="social-link_item"><i class="fa fa-vk"></i></a>
+                        <li class="social-link"><a href="https://vk.com/jakeminor" target="_blank" class="social-link_item" data-link="vk"><i class="fa fa-vk"></i></a>
                         </li>
-                        <li class="social-link"><a href="https://twitter.com/RayJackson132" target="_blank" class="social-link_item"><i class="fa fa-twitter"></i></a>
+                        <li class="social-link"><a href="https://twitter.com/RayJackson132" target="_blank" class="social-link_item" data-link="twitter"><i class="fa fa-twitter"></i></a>
                         </li>
-                        <li class="social-link"><a href="https://www.instagram.com/rayjackson132" target="_blank" class="social-link_item"><i class="fa fa-instagram"></i></a>
+                        <li class="social-link"><a href="https://www.instagram.com/rayjackson132" target="_blank" class="social-link_item" data-link="instagram"><i class="fa fa-instagram"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -55,10 +78,12 @@
                             <p class="slide-desc">Check out my 'Something Special' album or 'Home' single! Listen to it
                                 on SoundCloud or buy it on Bandcamp</p>
                             <div class="button-keeper d-flex">
-                                <a href="https://soundcloud.com/rayjackson13" target="_blank" class="media-button mobile-hide button-sc">Listen on SoundCloud</a>
-                                <a href="https://rayjackson.bandcamp.com/" target="_blank" class="media-button mobile-hide button-bc">Get it on Bandcamp</a>
-                                <a href="" class="media-button mobile-block button-sc">Listen on <i class="fa fa-soundcloud"></i></a>
-                                <a href="" class="media-button mobile-block button-bc">Get it on <i class="fa fa-bandcamp"></i></a>
+                                <a href="https://soundcloud.com/rayjackson13" target="_blank" data-link="soundcloud" class="media-button mobile-hide button-sc">Listen
+                                    on SoundCloud</a>
+                                <a href="https://rayjackson.bandcamp.com/" target="_blank" data-link="bandcamp" class="media-button mobile-hide button-bc">Get
+                                    it on Bandcamp</a>
+                                <a href="" class="media-button mobile-block button-sc" data-link="soundcloud">Listen on <i class="fa fa-soundcloud"></i></a>
+                                <a href="" class="media-button mobile-block button-bc" data-link="bandcamp">Get it on <i class="fa fa-bandcamp"></i></a>
                             </div>
                         </div>
                     </div>
@@ -116,7 +141,7 @@
                                 made for the game I'm still developing in my spare time. This album doesn't have a lot
                                 of tracks yet, but I plan to make more soon!</p>
                             <div class="button-keeper d-flex">
-                                <a href="https://soundcloud.com/rayjackson13/sets/in-the-quiet" target="_blank" class="media-button button-sc"><i class="fa fa-soundcloud"></i>"In The Quiet"</a>
+                                <a href="https://soundcloud.com/rayjackson13/sets/in-the-quiet" target="_blank" data-link="soundcloud" class="media-button button-sc"><i class="fa fa-soundcloud"></i>"In The Quiet"</a>
 
                             </div>
                         </div>
@@ -138,15 +163,15 @@
 
                 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                     <ul class="social ml-auto">
-                        <li class="social-link"><a href="" class="social-link_item"><i class="fa fa-bandcamp"></i></a>
+                        <li class="social-link"><a href="https://rayjackson.bandcamp.com/" target="_blank" class="social-link_item" data-link="bandcamp"><i class="fa fa-bandcamp"></i></a>
                         </li>
-                        <li class="social-link"><a href="" class="social-link_item"><i class="fa fa-soundcloud"></i></a>
+                        <li class="social-link"><a href="https://soundcloud.com/rayjackson13" target="_blank" class="social-link_item" data-link="soundcloud"><i class="fa fa-soundcloud"></i></a>
                         </li>
-                        <li class="social-link"><a href="" class="social-link_item"><i class="fa fa-vk"></i></a>
+                        <li class="social-link"><a href="https://vk.com/jakeminor" target="_blank" class="social-link_item" data-link="vk"><i class="fa fa-vk"></i></a>
                         </li>
-                        <li class="social-link"><a href="" class="social-link_item"><i class="fa fa-twitter"></i></a>
+                        <li class="social-link"><a href="https://twitter.com/RayJackson132" target="_blank" class="social-link_item" data-link="twitter"><i class="fa fa-twitter"></i></a>
                         </li>
-                        <li class="social-link"><a href="" class="social-link_item"><i class="fa fa-instagram"></i></a>
+                        <li class="social-link"><a href="https://www.instagram.com/rayjackson132" target="_blank" class="social-link_item" data-link="instagram"><i class="fa fa-instagram"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -163,7 +188,7 @@
                     <div class="col-12 col-md-7">
                         <div class="about-content">
                             <h1 class="about-content-title">Ray Jackson</h1>
-                            <p class="about-content-caption">Vocalist, Front-End developer and a personal callboy. 😉</p>
+                            <p class="about-content-caption">Vocalist, Front-End developer and personal callboy. 😉</p>
                             <p class="about-content-text">New album: June 2019</p>
                             <p class="about-content-text margin">Releasing all my music to iTunes, Spotify and other
                                 streaming services very soon.</p>
@@ -181,7 +206,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="music-item-wrap">
-                        <a href="https://soundcloud.com/rayjackson13/sets/something-special" target="_blank" class="music-item">
+                        <a href="https://soundcloud.com/rayjackson13/sets/something-special" target="_blank" class="music-item" data-link="ss">
                             <div class="music-item-img" style="background-image: url(img/ss.jpg)"></div>
                             <h3 class="music-item-title">Something Special</h3>
                             <p class="music-item-date">09/23/2017</p>
@@ -191,7 +216,7 @@
                 </div>
                 <div class="offset-0 offset-md-1 col-12 col-sm-6 col-md-3">
                     <div class="music-item-wrap">
-                        <a href="https://soundcloud.com/rayjackson13/sets/home" target="_blank" class="music-item">
+                        <a href="https://soundcloud.com/rayjackson13/sets/home" target="_blank" class="music-item" data-link="home">
                             <div class="music-item-img" style="background-image: url(img/home.jpg)"></div>
                             <h3 class="music-item-title">Home (Single)</h3>
                             <p class="music-item-date">11/23/2017</p>
@@ -215,6 +240,7 @@
 
     <script src="js/slider.js"></script>
     <script src="js/follow.js"></script>
+    <script src="js/metrics.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script>
         (function() {

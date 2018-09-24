@@ -11,13 +11,13 @@ $screen-sm: screen and (max-width: 767px);
     font-family: 'gilroy';
     font-style: normal;
     font-weight: 800;
-    src: local('Gilroy ExtraBold'), url('../fonts/gilroy.ttf') format('truetype'), url('../fonts/gilroy.otf') format('opentype');
+    src: local('Gilroy ExtraBold'), url('../fonts/gilroy.otf') format('opentype');
 }
 @font-face {
     font-family: 'gilroy';
     font-style: normal;
     font-weight: normal;
-    src: local('Gilroy Light'), url('../fonts/Gilroy-Light.otf') format('opentype'), url('../fonts/Gilroy-Light.ttf') format('truetype');
+    src: local('Gilroy Light'), url('../fonts/Gilroy-Light.otf') format('opentype');
 }
 
 body{
