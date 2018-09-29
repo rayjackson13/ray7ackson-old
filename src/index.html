@@ -24,7 +24,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
 
     <link rel="stylesheet" href="css/style.css">
@@ -82,8 +82,10 @@
                                     on SoundCloud</a>
                                 <a href="https://rayjackson.bandcamp.com/" target="_blank" data-link="bandcamp" class="media-button mobile-hide button-bc">Get
                                     it on Bandcamp</a>
-                                <a href="" class="media-button mobile-block button-sc" data-link="soundcloud">Listen on <i class="fa fa-soundcloud"></i></a>
-                                <a href="" class="media-button mobile-block button-bc" data-link="bandcamp">Get it on <i class="fa fa-bandcamp"></i></a>
+                                <a href="" class="media-button mobile-block button-sc" data-link="soundcloud">Listen on
+                                    <i class="fa fa-soundcloud"></i></a>
+                                <a href="" class="media-button mobile-block button-bc" data-link="bandcamp">Get it on
+                                    <i class="fa fa-bandcamp"></i></a>
                             </div>
                         </div>
                     </div>
@@ -141,7 +143,8 @@
                                 made for the game I'm still developing in my spare time. This album doesn't have a lot
                                 of tracks yet, but I plan to make more soon!</p>
                             <div class="button-keeper d-flex">
-                                <a href="https://soundcloud.com/rayjackson13/sets/in-the-quiet" target="_blank" data-link="soundcloud" class="media-button button-sc"><i class="fa fa-soundcloud"></i>"In The Quiet"</a>
+                                <a href="https://soundcloud.com/rayjackson13/sets/in-the-quiet" target="_blank" data-link="soundcloud" class="media-button button-sc"><i class="fa fa-soundcloud"></i>"In
+                                    The Quiet"</a>
 
                             </div>
                         </div>
@@ -178,6 +181,51 @@
             </div>
         </div>
     </section>
+    <div class="music">
+        <div class="container">
+            <h1 class="music-title">My music</h1>
+            <div class="row">
+                <div class="offset-0 offset-md-2 col-12 col-md-8">
+                    <div class="music-player">
+                        <div class="row">
+                            <div class="col-4 px-0">
+                                <div class="music-player-albums">
+                                    <h5 class="music-player-albums--title">Albums</h5>
+                                    <span class="music-player-albums--item">Something Special</span>
+                                    <span class="music-player-albums--item">Home - Single</span>
+                                </div>
+                            </div>
+                            <div class="col-8 px-0">
+                                <div class="music-player-controls">
+                                    <button class="music-player-controls--button" id="audioPlay" alt="Play">
+                                        <i class="fas fa-play-circle"></i>
+                                    </button>
+                                    <button class="music-player-controls--button small" id="audioPrev" alt="Previous track">
+                                        <i class="fas fa-backward"></i>
+                                    </button>
+                                    <button class="music-player-controls--button small mr-0" id="audioNext" alt="Next track">
+                                        <i class="fas fa-forward"></i>
+                                    </button>
+                                    <span class="music-player-controls-progress">
+                                        <span class="music-player-controls-progress--actual" id="audioProgress"></span>
+                                    </span>
+                                    <span class="music-player-controls-buy">
+                                        <a href="" class="music-player-controls-buy--link media-button">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span class="music-player-controls-buy--text">Buy</span>
+                                        </a>
+                                        <span class="music-player-control-buy--price" id="audioPrice"></span>
+                                    </span>
+                                </div>
+                                <div class="music-player-content">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="about">
         <div class="container">
             <div class="about-top">
@@ -240,6 +288,7 @@
 
     <script src="js/slider.js"></script>
     <script src="js/follow.js"></script>
+    <script src="js/audio.js"></script>
     <script src="js/metrics.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script>

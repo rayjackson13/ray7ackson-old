@@ -1,5 +1,5 @@
-$(function () {
-    $('a[data-link').click(function (e) {
+$(function() {
+    $('a[data-link').click(function(e) {
         var attr = e.currentTarget.getAttribute('data-link');
         if (attr === 'soundcloud') {
             gtag('event', 'soundcloud', {
@@ -30,5 +30,5 @@ $(function () {
                 'event_category': 'music'
             });
         }
-    });
-});
+    })
+})

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function(){
     $('.topper-slider .slide').css('display', 'flex');
     $('.topper-slider').slick({
         slidesToShow: 1,
@@ -11,6 +11,6 @@ $(document).ready(function () {
         appendDots: $('.topper-content .dots'),
         dotsClass: 'slider-dots',
         autoplay: true,
-        autoplaySpeed: 2500
+        autoplaySpeed: 2500,
     });
 });

@@ -94,4 +94,71 @@
             }
         }
     }
-}
+
+    &-player {
+        border-radius: 4px;
+        background-color: #ffffff;
+        overflow: hidden;
+
+        &-albums {
+            border-right: 1px solid #696969;
+            padding: 15px 30px 15px 30px;
+            width: 100%;
+        }
+
+        &-controls {
+            padding: 15px 30px 15px 30px;
+            border-bottom: 1px solid #696969;
+            display: flex;
+            align-items: center;
+
+            &--button {
+                display: inline-block;
+                vertical-align: middle;
+                width: 50px;
+                height: 50px;
+                border: 0;
+                outline: 0;
+                background: 0;
+                padding: 0;
+                margin-right: 10px;
+                &.small {
+                    margin-right: 10px;
+                    width: 25px;
+                    height: 25px;
+                }
+                .svg-inline--fa {
+                    width: 100%;
+                    height: 100%;
+                    path {
+                        transition: fill .25s;
+                    }
+                }
+                &:focus {
+                    outline: 0;
+                }
+                &:hover {
+                    .svg-inline--fa path {
+                        fill: #b00000;
+                    }
+                }
+            }
+
+            &-progress {
+                flex: 1;
+                height: 5px;
+                background-color: #b9b9b9;
+                margin: 0 15px;
+                border-radius: 2px;
+            }
+
+            &-buy {
+                display: inline-block;
+                .svg-inline--fa {
+                    margin-right: 0.1em;
+                    vertical-align: -0.3em;
+                }
+            }
+        }
+    }
+} 
