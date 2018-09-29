@@ -511,18 +511,21 @@ button {
     background-color: #ffffff;
     overflow: hidden; }
     .music-player-albums {
-      border-right: 1px solid #696969;
+      border-right: 1px solid rgba(105, 105, 105, 0.3);
       padding: 15px 30px 15px 30px;
       width: 100%; }
+      .music-player-albums--title {
+        font-family: 'gilroy';
+        font-weight: bold;
+        font-size: 26px; }
     .music-player-controls {
       padding: 15px 30px 15px 30px;
-      border-bottom: 1px solid #696969;
+      border-bottom: 1px solid rgba(105, 105, 105, 0.3);
       display: -webkit-box;
       display: -ms-flexbox;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center; }
+      display: flex; }
+      .music-player-controls-wrap {
+        display: block; }
       .music-player-controls--button {
         display: inline-block;
         vertical-align: middle;
@@ -552,14 +555,25 @@ button {
         -ms-flex: 1;
         flex: 1;
         height: 5px;
-        background-color: #b9b9b9;
+        background-color: rgba(185, 185, 185, 0.5);
         margin: 0 15px;
         border-radius: 2px; }
       .music-player-controls-buy {
-        display: inline-block; }
+        margin-left: auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center; }
         .music-player-controls-buy .svg-inline--fa {
           margin-right: 0.1em;
           vertical-align: -0.3em; }
+        .music-player-controls-buy--price {
+          margin-right: 0.5em;
+          display: inline-block;
+          font-family: 'Acme', sans-serif;
+          font-size: 22px; }
 
 @media screen and (max-width: 1200px) {
   .topper-slider {

@@ -101,16 +101,25 @@
         overflow: hidden;
 
         &-albums {
-            border-right: 1px solid #696969;
+            border-right: 1px solid rgba(105,105,105,.3);
             padding: 15px 30px 15px 30px;
             width: 100%;
+
+            &--title {
+                font-family: 'gilroy';
+                font-weight: bold;
+                font-size: 26px;
+            }
         }
 
         &-controls {
             padding: 15px 30px 15px 30px;
-            border-bottom: 1px solid #696969;
+            border-bottom: 1px solid rgba(105,105,105,.3);
             display: flex;
-            align-items: center;
+
+            &-wrap {
+                display: block;
+            }
 
             &--button {
                 display: inline-block;
@@ -147,16 +156,25 @@
             &-progress {
                 flex: 1;
                 height: 5px;
-                background-color: #b9b9b9;
+                background-color: rgba(185,185,185, .5);
                 margin: 0 15px;
                 border-radius: 2px;
             }
 
             &-buy {
-                display: inline-block;
+                margin-left: auto;
+                display: flex;
+                align-items: center;
                 .svg-inline--fa {
                     margin-right: 0.1em;
                     vertical-align: -0.3em;
+                }
+
+                &--price {
+                    margin-right: 0.5em;
+                    display: inline-block;
+                    font-family: 'Acme', sans-serif;
+                    font-size: 22px;
                 }
             }
         }

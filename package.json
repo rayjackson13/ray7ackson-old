@@ -21,6 +21,7 @@
     "gulp-html-beautify": "^1.0.1",
     "gulp-htmlmin": "^4.0.0",
     "gulp-sass": "^3.2.1",
+    "gulp-sass-glob": "^1.0.9",
     "gulp-uglify": "^3.0.0"
   },
   "scripts": {
