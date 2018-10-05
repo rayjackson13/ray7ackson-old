@@ -101,7 +101,6 @@
         overflow: hidden;
 
         &-albums {
-            border-right: 1px solid rgba(105,105,105,.3);
             padding: 15px 30px 15px 30px;
             width: 100%;
 
@@ -110,6 +109,10 @@
                 font-weight: bold;
                 font-size: 26px;
             }
+        }
+
+        &-rewind {
+            border-left: 1px solid rgba(105,105,105,.3);
         }
 
         &-controls {
@@ -175,6 +178,30 @@
                     display: inline-block;
                     font-family: 'Acme', sans-serif;
                     font-size: 22px;
+                }
+            }
+        }
+
+        &-content {
+            padding: 15px;
+            padding-right: 14px;
+            padding-left: 0;
+            &--item {
+                padding: 5px 30px;
+                display: block;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background-color .125s, color .125s;
+                color: #2e2e2e;
+
+                &:hover {
+                    background-color: #d64545;
+                    color: #ffffff;
+                }
+
+                &.active {
+                    background-color: #b00000;
+                    color: #ffffff;
                 }
             }
         }

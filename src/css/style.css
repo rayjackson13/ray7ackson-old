@@ -511,13 +511,14 @@ button {
     background-color: #ffffff;
     overflow: hidden; }
     .music-player-albums {
-      border-right: 1px solid rgba(105, 105, 105, 0.3);
       padding: 15px 30px 15px 30px;
       width: 100%; }
       .music-player-albums--title {
         font-family: 'gilroy';
         font-weight: bold;
         font-size: 26px; }
+    .music-player-rewind {
+      border-left: 1px solid rgba(105, 105, 105, 0.3); }
     .music-player-controls {
       padding: 15px 30px 15px 30px;
       border-bottom: 1px solid rgba(105, 105, 105, 0.3);
@@ -574,6 +575,24 @@ button {
           display: inline-block;
           font-family: 'Acme', sans-serif;
           font-size: 22px; }
+    .music-player-content {
+      padding: 15px;
+      padding-right: 14px;
+      padding-left: 0; }
+      .music-player-content--item {
+        padding: 5px 30px;
+        display: block;
+        cursor: pointer;
+        font-size: 14px;
+        -webkit-transition: background-color .125s, color .125s;
+        transition: background-color .125s, color .125s;
+        color: #2e2e2e; }
+        .music-player-content--item:hover {
+          background-color: #d64545;
+          color: #ffffff; }
+        .music-player-content--item.active {
+          background-color: #b00000;
+          color: #ffffff; }
 
 @media screen and (max-width: 1200px) {
   .topper-slider {
