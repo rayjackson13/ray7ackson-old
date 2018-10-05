@@ -6,7 +6,7 @@ var music = [{
     songs: [{
         id: 0,
         title: 'In Your Eyes',
-        link: ''
+        link: '/music/somesay.mp3'
     }, {
         id: 1,
         title: 'Something Special',
@@ -34,6 +34,13 @@ var music = [{
     }]
 }];
 
+var player = new Player({
+    element: document.getElementById('audioPlayer'),
+    playButton: document.getElementById('audioPlay'),
+    nextButton: document.getElementById('audioNext'),
+    prevButton: document.getElementById('audioPrev')
+});
+
 var buy = {
     price: document.getElementById('audioPrice'),
     link: document.getElementById('audioBuy')
@@ -59,10 +66,26 @@ var fillMusic = function fillMusic(songs) {
             var song = _step.value;
 
             var a = document.createElement('span');
+            a.setAttribute('data-uri', song.link);
             a.classList.add('music-player-content--item');
-            a.onclick = songClick;
-            a.innerText = song.title;
             listMusic.appendChild(a);
+
+            var button = document.createElement('button');
+            button.setAttribute('type', 'button');
+            button.classList.add('music-player-content--item-button');
+            button.onclick = songClick;
+            a.appendChild(button);
+
+            var icon = document.createElement('i');
+            icon.classList.add('fas');
+            icon.classList.add('fa-play');
+            icon.classList.add('music-player-content--item-icon');
+            button.appendChild(icon);
+
+            var span = document.createElement('span');
+            span.classList.add('music-player-content--item-name');
+            span.innerText = song.title;
+            a.appendChild(span);
         }
     } catch (err) {
         _didIteratorError = true;
@@ -108,9 +131,14 @@ var removeActive = function removeActive() {
 };
 
 var songClick = function songClick(e) {
-    var song = e.currentTarget;
+    var button = e.currentTarget;
+    var song = button.parentElement;
+    button.classList.remove('fa-play');
+    button.classList.add('fa-pause');
     removeActive();
     song.classList.add('active');
+    player.setTrack(song.getAttribute('data-uri'));
+    player.play();
 };
 
 showCurrentAlbum();

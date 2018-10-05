@@ -8,7 +8,7 @@ const music = [
             {
                 id: 0,
                 title: 'In Your Eyes',
-                link: ''
+                link: '/music/somesay.mp3'
             },
             {
                 id: 1,
@@ -44,6 +44,13 @@ const music = [
     }
 ]
 
+const player = new Player({
+    element: document.getElementById('audioPlayer'),
+    playButton: document.getElementById('audioPlay'),
+    nextButton: document.getElementById('audioNext'),
+    prevButton: document.getElementById('audioPrev')
+})
+
 const buy = {
     price: document.getElementById('audioPrice'),
     link: document.getElementById('audioBuy')
@@ -62,10 +69,26 @@ const showCurrentAlbum = () => {
 const fillMusic = (songs) => {
     for (let song of songs) {
         let a = document.createElement('span')
+        a.setAttribute('data-uri', song.link)
         a.classList.add('music-player-content--item')
-        a.onclick = songClick
-        a.innerText = song.title
         listMusic.appendChild(a)
+
+        let button = document.createElement('button')
+        button.setAttribute('type', 'button')
+        button.classList.add('music-player-content--item-button')
+        button.onclick = songClick
+        a.appendChild(button)
+
+        let icon = document.createElement('i')
+        icon.classList.add('fas')
+        icon.classList.add('fa-play')
+        icon.classList.add('music-player-content--item-icon')
+        button.appendChild(icon)
+
+        let span = document.createElement('span')
+        span.classList.add('music-player-content--item-name')
+        span.innerText = song.title
+        a.appendChild(span)
     }
 }
 
@@ -76,9 +99,14 @@ const removeActive = () => {
 }
 
 const songClick = (e) => {
-    const song = e.currentTarget
+    const button = e.currentTarget
+    const song = button.parentElement
+    button.classList.remove('fa-play')
+    button.classList.add('fa-pause')
     removeActive()
     song.classList.add('active')
+    player.setTrack(song.getAttribute('data-uri'))
+    player.play()
 }
 
 showCurrentAlbum()

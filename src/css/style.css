@@ -590,9 +590,27 @@ button {
         .music-player-content--item:hover {
           background-color: #d64545;
           color: #ffffff; }
+          .music-player-content--item:hover .music-player-content--item-icon {
+            opacity: 1;
+            -webkit-transition: opacity .125s;
+            transition: opacity .125s; }
         .music-player-content--item.active {
           background-color: #b00000;
           color: #ffffff; }
+          .music-player-content--item.active .music-player-content--item-button {
+            opacity: 0;
+            pointer-events: none; }
+        .music-player-content--item-name {
+          margin-left: 15px; }
+        .music-player-content--item-button {
+          padding: 0;
+          border: 0;
+          background: 0;
+          color: #ffffff; }
+          .music-player-content--item-button:focus {
+            outline: 0; }
+        .music-player-content--item-icon {
+          opacity: 0; }
 
 @media screen and (max-width: 1200px) {
   .topper-slider {

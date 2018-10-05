@@ -197,11 +197,37 @@
                 &:hover {
                     background-color: #d64545;
                     color: #ffffff;
+                    .music-player-content--item-icon {
+                        opacity: 1;
+                        transition: opacity .125s;
+                    }
                 }
 
                 &.active {
                     background-color: #b00000;
                     color: #ffffff;
+                    .music-player-content--item-button {
+                        opacity: 0;
+                        pointer-events: none;
+                    }
+                }
+
+                &-name {
+                    margin-left: 15px;
+                }
+
+                &-button {
+                    padding: 0;
+                    border: 0;
+                    background: 0;
+                    color: #ffffff;
+                    &:focus {
+                        outline: 0;
+                    }
+                }
+
+                &-icon {
+                    opacity: 0;
                 }
             }
         }
