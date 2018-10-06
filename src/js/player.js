@@ -15,19 +15,21 @@ var Player = function () {
 
         this.playButton.querySelector('i.fas').classList.add('fa-play-circle');
 
-        this.playButton.onclick = function () {
-            if (_this.element.paused) {
-                _this.element.getAttribute('src') !== null && _this.play();
-            } else {
-                _this.pause();
-            }
+        this.element.onended = function () {
+            _this.playNext();
         };
     }
 
     _createClass(Player, [{
+        key: 'setQueue',
+        value: function setQueue(album) {
+            this.queue = album.songs;
+        }
+    }, {
         key: 'setTrack',
-        value: function setTrack(uri) {
-            this.element.setAttribute('src', uri);
+        value: function setTrack(index) {
+            this.song = index;
+            this.element.setAttribute('src', this.queue[index].link);
         }
     }, {
         key: 'play',
@@ -48,6 +50,20 @@ var Player = function () {
             icon.classList.add('fas');
             icon.classList.add('fa-play-circle');
             this.playButton.appendChild(icon);
+        }
+    }, {
+        key: 'playNext',
+        value: function playNext() {
+            this.song++;
+            this.setTrack(this.song);
+            this.play();
+        }
+    }, {
+        key: 'playPrev',
+        value: function playPrev() {
+            this.song--;
+            this.setTrack(this.song);
+            this.play();
         }
     }]);
 

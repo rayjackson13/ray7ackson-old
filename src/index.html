@@ -24,8 +24,8 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -183,17 +183,17 @@
     </section>
     <div class="music">
         <div class="container">
-            <h1 class="music-title">My music</h1>
+            <h1 class="music-title">Play my music</h1>
             <div class="row">
                 <div class="offset-0 offset-md-2 col-12 col-md-8">
                     <div class="music-player">
                         <audio id="audioPlayer"></audio>
-                        <div class="row">
+                        <div class="row height-full">
                             <div class="col-4 px-0">
                                 <div class="music-player-albums">
                                     <h5 class="music-player-albums--title">Albums</h5>
-                                    <span class="music-player-albums--item">Something Special</span>
-                                    <span class="music-player-albums--item">Home - Single</span>
+                                    <span class="music-player-albums--item" data-album="0">Something Special</span>
+                                    <span class="music-player-albums--item" data-album="1">Home - Single</span>
                                 </div>
                             </div>
                             <div class="col-8 px-0 music-player-rewind">
@@ -203,10 +203,10 @@
                                             <i class="fas"></i>
                                         </button>
                                         <button class="music-player-controls--button small" id="audioPrev" alt="Previous track">
-                                            <i class="fas fa-backward"></i>
+                                            <i class="fas fa-step-backward"></i>
                                         </button>
                                         <button class="music-player-controls--button small mr-0" id="audioNext" alt="Next track">
-                                            <i class="fas fa-forward"></i>
+                                            <i class="fas fa-step-forward"></i>
                                         </button>
                                     </span>
                                     <span class="music-player-controls-buy">
@@ -248,9 +248,9 @@
             </div>
         </div>
     </div>
-    <div class="music">
+    <div class="music soundcloud">
         <div class="container">
-            <h1 class="music-title">My music</h1>
+            <h1 class="music-title">My soundcloud</h1>
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="music-item-wrap">
@@ -285,6 +285,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+
 
     <script src="js/slider.js"></script>
     <script src="js/follow.js"></script>

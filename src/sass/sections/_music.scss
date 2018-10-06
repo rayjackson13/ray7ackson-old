@@ -4,6 +4,11 @@
     background-size: cover;
     background-position: bottom;
 
+    &:not(.soundcloud) {
+        background-image: linear-gradient(to bottom, rgba(32,32,32,.15) 0%, rgba(0,0,0,.85) 100%), url(../img/player.jpg);
+        background-position: 0 15%;
+    }
+
     @media #{$screen-sm} {
         padding: 50px 0;
     }
@@ -18,6 +23,7 @@
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        text-shadow: 0 2px 4px rgba(0,0,0,.35);
 
         @media #{$screen-sm} {
             font-size: 24px;
@@ -96,18 +102,41 @@
     }
 
     &-player {
-        border-radius: 4px;
+        height: 330px;
+        border-radius: 10px;
         background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0,0,0,.25);
         overflow: hidden;
 
         &-albums {
-            padding: 15px 30px 15px 30px;
             width: 100%;
+            height: 100%;
+            background-color: #f2f2f2;
+            padding-left: 15px;
 
             &--title {
                 font-family: 'gilroy';
                 font-weight: bold;
                 font-size: 26px;
+                padding: 25px 30px;
+                text-align: center;
+                margin-bottom: 0;
+            }
+            &--item {
+                font-family: 'Acme';
+                font-size: 18px;
+                display: block;
+                padding: 2px 30px;
+                cursor: pointer;
+                transition: background-color .125s, color .125s;
+                &:hover {
+                    background-color: #d64545;
+                    color: #ffffff;
+                }
+                &.active {
+                    background-color: #b00000;
+                    color: #ffffff;
+                }
             }
         }
 
@@ -116,28 +145,31 @@
         }
 
         &-controls {
-            padding: 15px 30px 15px 30px;
+            padding: 15px 0;
+            margin-left: 30px;
+            margin-right: 45px;
             border-bottom: 1px solid rgba(105,105,105,.3);
             display: flex;
 
             &-wrap {
                 display: block;
+                font-size: 0;
             }
 
             &--button {
                 display: inline-block;
                 vertical-align: middle;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
                 border: 0;
                 outline: 0;
                 background: 0;
                 padding: 0;
                 margin-right: 10px;
                 &.small {
-                    margin-right: 10px;
-                    width: 25px;
-                    height: 25px;
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 5px;
                 }
                 .svg-inline--fa {
                     width: 100%;
@@ -204,7 +236,7 @@
                 }
 
                 &.active {
-                    background-color: #b00000;
+                    background-color: #616161;
                     color: #ffffff;
                     .music-player-content--item-button {
                         opacity: 0;

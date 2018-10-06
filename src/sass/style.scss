@@ -35,6 +35,12 @@ button{
     color: #B00000;
 }
 
+.height {
+    &-full {
+        height: 100%;
+    }
+}
+
 .media-button{
     display: inline-block;
     padding: 10px 14px;
