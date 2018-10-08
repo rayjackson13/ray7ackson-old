@@ -239,6 +239,8 @@ nextButton.onclick = function () {
     player.playNext();
     if ($('.music-player-content--item[data-index=' + player.song + ']').length > 0) {
         $('.music-player-content--item[data-index=' + player.song + ']').addClass('active');
+    } else {
+        player.pause();
     }
 };
 
@@ -247,6 +249,16 @@ prevButton.onclick = function () {
     player.playPrev();
     if ($('.music-player-content--item[data-index=' + player.song + ']').length > 0) {
         $('.music-player-content--item[data-index=' + player.song + ']').addClass('active');
+    }
+};
+
+player.element.onended = function () {
+    removeActive();
+    player.playNext();
+    if ($('.music-player-content--item[data-index=' + player.song + ']').length > 0) {
+        $('.music-player-content--item[data-index=' + player.song + ']').addClass('active');
+    } else {
+        player.pause();
     }
 };
 

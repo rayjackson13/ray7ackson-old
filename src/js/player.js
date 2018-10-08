@@ -4,8 +4,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var Player = function () {
     function Player(values) {
-        var _this = this;
-
         _classCallCheck(this, Player);
 
         this.element = values.element;
@@ -14,10 +12,6 @@ var Player = function () {
         this.prevButton = values.prevButton;
 
         this.playButton.querySelector('i.fas').classList.add('fa-play-circle');
-
-        this.element.onended = function () {
-            _this.playNext();
-        };
     }
 
     _createClass(Player, [{
@@ -55,8 +49,14 @@ var Player = function () {
         key: 'playNext',
         value: function playNext() {
             this.song++;
-            this.setTrack(this.song);
-            this.play();
+            if (this.song < this.queue.length) {
+                this.setTrack(this.song);
+                this.play();
+            } else {
+                this.pause();
+                this.song = 0;
+                this.setTrack(this.song);
+            }
         }
     }, {
         key: 'playPrev',

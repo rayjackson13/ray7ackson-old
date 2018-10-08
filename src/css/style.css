@@ -101,6 +101,11 @@ button {
 .mobile-block {
   display: none; }
 
+@media (max-width: 575px) {
+  .no_padding-xs {
+    padding-left: 0 !important;
+    padding-right: 0 !important; } }
+
 .topper {
   height: 100vh;
   min-height: 600px;
@@ -444,13 +449,13 @@ button {
   .music:not(.soundcloud) {
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(32, 32, 32, 0.15)), to(rgba(0, 0, 0, 0.85))), url(../img/player.jpg);
     background-image: linear-gradient(to bottom, rgba(32, 32, 32, 0.15) 0%, rgba(0, 0, 0, 0.85) 100%), url(../img/player.jpg);
-    background-position: 0 15%; }
+    background-position: 0 75%; }
   @media (max-width: 767px) {
     .music {
       padding: 50px 0; } }
   .music-title {
     text-align: center;
-    color: #dadada;
+    color: #fff;
     font-size: 36px;
     line-height: 48px;
     margin-bottom: 60px;
@@ -521,11 +526,18 @@ button {
     -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     overflow: hidden; }
+    @media (max-width: 575px) {
+      .music-player {
+        height: auto;
+        border-radius: 0; } }
     .music-player-albums {
       width: 100%;
       height: 100%;
       background-color: #f2f2f2;
       padding-left: 15px; }
+      @media (max-width: 575px) {
+        .music-player-albums {
+          padding-bottom: 15px; } }
       .music-player-albums--title {
         font-family: 'gilroy';
         font-weight: bold;
@@ -533,6 +545,10 @@ button {
         padding: 25px 30px;
         text-align: center;
         margin-bottom: 0; }
+        @media (max-width: 575px) {
+          .music-player-albums--title {
+            padding-top: 15px;
+            padding-bottom: 10px; } }
       .music-player-albums--item {
         font-family: 'Acme';
         font-size: 18px;
@@ -644,6 +660,80 @@ button {
             outline: 0; }
         .music-player-content--item-icon {
           opacity: 0; }
+
+.footer {
+  height: 50px; }
+  .footer .navbar {
+    background-color: #2e2e2e;
+    height: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3); }
+    @media (max-width: 767px) {
+      .footer .navbar {
+        padding-left: 0;
+        padding-right: 0; } }
+    .footer .navbar-brand {
+      font-family: acme;
+      color: #ffffff;
+      font-size: 22px; }
+      @media (max-width: 991px) {
+        .footer .navbar-brand {
+          display: inline-block; } }
+      @media (max-width: 767px) {
+        .footer .navbar-brand {
+          display: none; } }
+    .footer .navbar .social {
+      background-color: rgba(0, 0, 0, 0.3);
+      margin-bottom: 0;
+      padding-left: 0;
+      padding: 5px 10px;
+      border-radius: 8px;
+      list-style: none;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex; }
+      .footer .navbar .social-link_item {
+        padding: 0px 10px;
+        height: 50px;
+        color: #fff;
+        opacity: .2;
+        font-size: 22px;
+        -webkit-transition: opacity .125s, background-color .125s;
+        transition: opacity .125s, background-color .125s; }
+        .footer .navbar .social-link_item:hover {
+          opacity: 1; }
+        .footer .navbar .social-link_item > i {
+          height: auto; }
+      @media (max-width: 991px) {
+        .footer .navbar .social {
+          display: none; } }
+    .footer .navbar .menu {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      list-style: none; }
+    @media (max-width: 991px) {
+      .footer .navbar-collapse {
+        display: inline-block;
+        width: calc(100% - 200px);
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0; } }
+    @media (max-width: 767px) {
+      .footer .navbar-collapse {
+        display: block;
+        width: 100%; } }
+  .footer-copy {
+    color: #bcbcbc; }
+    @media (max-width: 991px) {
+      .footer-copy {
+        display: block;
+        text-align: right; } }
+    @media (max-width: 767px) {
+      .footer-copy {
+        display: block;
+        text-align: center; } }
 
 @media screen and (max-width: 1200px) {
   .topper-slider {

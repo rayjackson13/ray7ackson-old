@@ -6,10 +6,6 @@ class Player {
         this.prevButton = values.prevButton
 
         this.playButton.querySelector('i.fas').classList.add('fa-play-circle')
-        
-        this.element.onended = () => {
-            this.playNext()
-        }
     }
 
     setQueue(album) {
@@ -41,8 +37,14 @@ class Player {
 
     playNext() {
         this.song++
+        if (this.song < this.queue.length) {
         this.setTrack(this.song)
         this.play()
+        } else {
+            this.pause()
+            this.song = 0
+            this.setTrack(this.song)
+        }
     }
 
     playPrev() {

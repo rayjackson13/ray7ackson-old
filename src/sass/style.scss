@@ -1,5 +1,6 @@
-$screen-xs: screen and (max-width: 575px);
-$screen-sm: screen and (max-width: 767px);
+$screen-xxs: screen and (max-width: 575px);
+$screen-xs: screen and (max-width: 767px);
+$screen-sm: screen and (max-width: 991px);
 
 @font-face {
     font-family: 'acme';
@@ -120,10 +121,18 @@ button{
     display: none;
 }
 
+.no_padding-xs{
+    @media #{$screen-xxs} {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
 @import "sections/topper";
 @import "sections/follow";
 @import "sections/about";
 @import "sections/music";
+@import "sections/footer";
 @import "mobile/_large.scss";
 @import "mobile/_medium.scss";
 @import "mobile/_small.scss";

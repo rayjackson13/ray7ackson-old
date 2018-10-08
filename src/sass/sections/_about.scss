@@ -2,7 +2,7 @@
     padding: 100px 0 50px;
     background-color: #424242;
 
-    @media #{$screen-sm} {
+    @media #{$screen-xs} {
         padding: 50px 0 25px;
         
     }
@@ -20,7 +20,7 @@
         border-radius: 25px;
         box-shadow: 2px 1px 10px rgba(0,0,0,.35);
 
-        @media #{$screen-sm} {
+        @media #{$screen-xs} {
             width: 200px;
             height: 200px;
             padding-bottom: 0;
@@ -38,7 +38,7 @@
             font-family: 'Gilroy', sans-serif;
             font-weight: 800;
             margin-bottom: 5px;
-            @media #{$screen-sm} {
+            @media #{$screen-xs} {
                 font-size: 24px;
                 line-height: 28px;
             }
@@ -50,7 +50,7 @@
             font-family: 'Gilroy', sans-serif;
             font-weight: normal;
             margin-bottom: 60px;
-            @media #{$screen-sm} {
+            @media #{$screen-xs} {
                 font-size: 20px;
                 line-height: 22px;
                 margin-bottom: 30px;
@@ -63,7 +63,7 @@
             font-family: 'Gilroy', sans-serif;
             margin-bottom: 10px;
 
-            @media #{$screen-sm} {
+            @media #{$screen-xs} {
                 font-size: 16px;
                 line-height: 18px;
             }
