@@ -67,33 +67,4 @@ var initializeSnow = function initializeSnow() {
     bubble();
 };
 
-var checkTime = function checkTime() {
-    var timeZone = moment.tz.guess();
-    var time = moment().tz(timeZone).hour();
-
-    var changeDayTime = function changeDayTime(s) {
-        var landscape = document.querySelector('.landscape');
-        var sun = document.querySelector('.sun');
-        var moon = document.querySelector('.moon');
-        switch (s) {
-            case 'day':
-                sun.classList.remove('hidden');
-                moon.classList.add('hidden');
-                landscape.classList.add('day');
-                break;
-            case 'night':
-                sun.classList.add('hidden');
-                moon.classList.remove('hidden');
-                landscape.classList.remove('day');
-                break;
-        }
-    };
-    if (time > 8 && time < 18) {
-        changeDayTime('day');
-    } else {
-        changeDayTime('night');
-    }
-};
-
 initializeSnow();
-checkTime();

@@ -59,34 +59,4 @@ var initializeSnow = function () {
     bubble();
 }
 
-var checkTime = function () {
-    var timeZone = moment.tz.guess();
-    var time = moment().tz(timeZone).hour();
-
-    var changeDayTime = function (s) {
-        const landscape = document.querySelector('.landscape');
-        const sun = document.querySelector('.sun');
-        const moon = document.querySelector('.moon');
-        switch (s) {
-            case 'day':
-                sun.classList.remove('hidden');
-                moon.classList.add('hidden');
-                landscape.classList.add('day');
-                break;
-            case 'night':
-                sun.classList.add('hidden');
-                moon.classList.remove('hidden');
-                landscape.classList.remove('day');
-                break;
-        }
-    }
-    if (time > 8 && time < 18) {
-        changeDayTime('day')
-    } else {
-        changeDayTime('night')
-    }
-
-}
-
 initializeSnow();
-checkTime();
