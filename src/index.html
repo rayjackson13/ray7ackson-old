@@ -44,6 +44,18 @@
 
 <body>
     <header class="topper">
+        <div class="landscape">
+            <div class="sun"></div>
+            <div class="moon hidden"></div>
+            <div class="hills">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <canvas id="snow"></canvas>
+        </div>
         <nav class="header navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><span class="accent">Ray</span> 7ackson</a>
@@ -74,17 +86,21 @@
                             <div class="slide-img" style="background-image: url(img/ss.jpg); height: 300px;"></div>
                         </div>
                         <div class="slide-right">
-                            <h1 class="slide-caption">My music is <span class="accent">waiting</span><br />for you!</h1>
-                            <p class="slide-desc">Check out my 'Something Special' album or 'Home' single! Listen to it
+                            <h1 class="slide-caption">My music is <span class="accent">waiting</span><br />for
+                                you!</h1>
+                            <p class="slide-desc">Check out my 'Something Special' album or 'Home' single!
+                                Listen to it
                                 on SoundCloud or buy it on Bandcamp</p>
                             <div class="button-keeper d-flex">
                                 <a href="https://soundcloud.com/rayjackson13" target="_blank" data-link="soundcloud" class="media-button mobile-hide button-sc">Listen
                                     on SoundCloud</a>
                                 <a href="https://rayjackson.bandcamp.com/" target="_blank" data-link="bandcamp" class="media-button mobile-hide button-bc">Get
                                     it on Bandcamp</a>
-                                <a href="" class="media-button mobile-block button-sc" data-link="soundcloud">Listen on
+                                <a href="" class="media-button mobile-block button-sc" data-link="soundcloud">Listen
+                                    on
                                     <i class="fab fa-soundcloud"></i></a>
-                                <a href="" class="media-button mobile-block button-bc" data-link="bandcamp">Get it on
+                                <a href="" class="media-button mobile-block button-bc" data-link="bandcamp">Get
+                                    it on
                                     <i class="fab fa-bandcamp"></i></a>
                             </div>
                         </div>
@@ -94,17 +110,21 @@
                         <div class="slide-right">
                             <p class="slide-caption">What I do:</p>
                             <ul class="slide-list">
-                                <li class="slide-list_item"><span class="slide-list_item__text">Android Development</span>
+                                <li class="slide-list_item"><span class="slide-list_item__text">Android
+                                        Development</span>
                                 </li>
-                                <li class="slide-list_item"><span class="slide-list_item__text">Frontend (HTML5, CSS3,
+                                <li class="slide-list_item"><span class="slide-list_item__text">Frontend
+                                        (HTML5, CSS3,
                                         JavaScript, React.js)</span>
                                 </li>
                                 <li class="slide-list_item"><span class="slide-list_item__text">Unity 3D (C#
                                         Programming)</span>
                                 </li>
-                                <li class="slide-list_item"><span class="slide-list_item__text">Cross-browser support</span>
+                                <li class="slide-list_item"><span class="slide-list_item__text">Cross-browser
+                                        support</span>
                                 </li>
-                                <li class="slide-list_item"><span class="slide-list_item__text">Clean responsive design</span>
+                                <li class="slide-list_item"><span class="slide-list_item__text">Clean
+                                        responsive design</span>
                                 </li>
                                 <li class="slide-list_item"><span class="slide-list_item__text">and more...</span>
                                 </li>
@@ -139,8 +159,10 @@
                         </div>
                         <div class="slide-right">
                             <h1 class="slide-caption">"In The Quiet" Soundtrack</h1>
-                            <p class="slide-desc">Listen to the <span class="accent">calm relaxing music</span> that I
-                                made for the game I'm still developing in my spare time. This album doesn't have a lot
+                            <p class="slide-desc">Listen to the <span class="accent">calm relaxing music</span>
+                                that I
+                                made for the game I'm still developing in my spare time. This album doesn't
+                                have a lot
                                 of tracks yet, but I plan to make more soon!</p>
                             <div class="button-keeper d-flex">
                                 <a href="https://soundcloud.com/rayjackson13/sets/in-the-quiet" target="_blank" data-link="soundcloud" class="media-button button-sc"><i class="fab fa-soundcloud"></i>"In
@@ -315,6 +337,7 @@
     <script src="js/player.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/metrics.js"></script>
+    <script src="js/topper.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script>
         (function() {

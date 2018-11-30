@@ -109,9 +109,26 @@ button {
 .topper {
   height: 100vh;
   min-height: 600px;
-  background-image: url(../img/bg.jpg);
-  background-size: cover;
-  background-position: center center; }
+  position: relative;
+  overflow: hidden; }
+  .topper .landscape {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-image: url("/img/bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+    z-index: -1; }
+  .topper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1; }
   .topper .header {
     height: 95px;
     padding-left: 100px;
@@ -134,10 +151,10 @@ button {
       .topper .header .social-link_item {
         padding: 0px 10px;
         color: #000;
-        opacity: .2;
+        opacity: 0.2;
         font-size: 26px;
-        -webkit-transition: opacity .125s, background-color .125s;
-        transition: opacity .125s, background-color .125s; }
+        -webkit-transition: opacity 0.125s, background-color 0.125s;
+        transition: opacity 0.125s, background-color 0.125s; }
         .topper .header .social-link_item:hover {
           opacity: 1; }
         .topper .header .social-link_item > i {
@@ -194,9 +211,9 @@ button {
             top: -6px;
             background-color: #7d7d7d;
             border: 0;
-            -webkit-transition: background-color .125s;
-            transition: background-color .125s;
-            content: '';
+            -webkit-transition: background-color 0.125s;
+            transition: background-color 0.125s;
+            content: "";
             width: 12px;
             height: 12px;
             padding: 0;
@@ -214,13 +231,13 @@ button {
     width: 50px;
     height: 50px;
     background-color: #fff;
-    opacity: .8;
+    opacity: 0.8;
     border-radius: 50%;
     border: 0;
-    -webkit-transition: -webkit-box-shadow .25s;
-    transition: -webkit-box-shadow .25s;
-    transition: box-shadow .25s;
-    transition: box-shadow .25s, -webkit-box-shadow .25s;
+    -webkit-transition: -webkit-box-shadow 0.25s;
+    transition: -webkit-box-shadow 0.25s;
+    transition: box-shadow 0.25s;
+    transition: box-shadow 0.25s, -webkit-box-shadow 0.25s;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -231,16 +248,16 @@ button {
     -ms-flex-align: center;
     align-items: center; }
     .topper .arrow::after {
-      content: '';
+      content: "";
       width: 26px;
       height: 26px;
       background-image: url(../img/arrow.svg);
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
-      opacity: .6;
-      -webkit-transition: opacity .25s;
-      transition: opacity .25s; }
+      opacity: 0.6;
+      -webkit-transition: opacity 0.25s;
+      transition: opacity 0.25s; }
     .topper .arrow:hover {
       -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19);
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19); }
