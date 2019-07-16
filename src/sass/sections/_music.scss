@@ -143,13 +143,34 @@
                 padding: 2px 30px;
                 cursor: pointer;
                 transition: background-color .125s, color .125s;
+                position: relative;
+                z-index: 0;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: -1px;
+                    background-color: transparent;
+                    transition: background-color .125s;
+                    z-index: -1;
+                }
+
                 &:hover {
-                    background-color: #d64545;
                     color: #ffffff;
+
+                    &::after {
+                        background-color: #d64545;
+                    }
                 }
                 &.active {
-                    background-color: #b00000;
                     color: #ffffff;
+
+                    &::after {
+                        background-color: #b00000;
+                    }
                 }
             }
         }

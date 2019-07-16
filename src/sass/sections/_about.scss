@@ -76,6 +76,32 @@
                 margin-bottom: 0;
                 text-align: right;
             }
+
+            a {
+                color: #cfcfcf;
+                text-decoration: none;
+                position: relative;
+                display: inline-block;
+                transition: all .125s;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0; 
+                    height: 1px;
+                    background-color: #ffffff;
+                    transition: all .125s;
+                }
+
+                &:hover {
+                    color: #ffffff;
+                    &::after {
+                        transform: translateY(2px);
+                    }
+                }
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ button {
 .media-button {
   display: inline-block;
   padding: 10px 14px;
-  border-radius: 2px;
+  border-radius: 4px;
   text-transform: uppercase;
   font-family: acme;
   font-size: 13px;
@@ -45,7 +45,9 @@ button {
   transition: background-color .25s, box-shadow .25s, -webkit-box-shadow .25s;
   position: relative;
   z-index: 110;
-  overflow: hidden; }
+  overflow: hidden;
+  -webkit-box-shadow: 0px 3px 5px transparent;
+  box-shadow: 0px 3px 5px transparent; }
   .media-button::after {
     position: absolute;
     content: '';
@@ -117,7 +119,8 @@ button {
     width: 100%;
     top: 0;
     left: 0;
-    background-image: url("/img/bg.jpg");
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(55, 55, 55, 0.25)), to(rgba(55, 55, 55, 0))), url("/img/bg.jpeg");
+    background-image: linear-gradient(90deg, rgba(55, 55, 55, 0.25) 0%, rgba(55, 55, 55, 0) 100%), url("/img/bg.jpeg");
     background-size: cover;
     background-position: center center;
     overflow: hidden;
@@ -352,8 +355,6 @@ button {
         width: 100%;
         -ms-flex-pack: distribute;
         justify-content: space-around; }
-    .topper-slider .slide-portfolio .media-button {
-      font-size: 16px; }
 
 .header-follow {
   height: 50px; }
@@ -456,6 +457,28 @@ button {
       .about-content-text:last-child {
         margin-bottom: 0;
         text-align: right; }
+      .about-content-text a {
+        color: #cfcfcf;
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        -webkit-transition: all .125s;
+        transition: all .125s; }
+        .about-content-text a::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background-color: #ffffff;
+          -webkit-transition: all .125s;
+          transition: all .125s; }
+        .about-content-text a:hover {
+          color: #ffffff; }
+          .about-content-text a:hover::after {
+            -webkit-transform: translateY(2px);
+            transform: translateY(2px); }
 
 .music {
   padding: 100px 0;
@@ -573,13 +596,28 @@ button {
         padding: 2px 30px;
         cursor: pointer;
         -webkit-transition: background-color .125s, color .125s;
-        transition: background-color .125s, color .125s; }
+        transition: background-color .125s, color .125s;
+        position: relative;
+        z-index: 0; }
+        .music-player-albums--item::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: -1px;
+          background-color: transparent;
+          -webkit-transition: background-color .125s;
+          transition: background-color .125s;
+          z-index: -1; }
         .music-player-albums--item:hover {
-          background-color: #d64545;
           color: #ffffff; }
+          .music-player-albums--item:hover::after {
+            background-color: #d64545; }
         .music-player-albums--item.active {
-          background-color: #b00000;
           color: #ffffff; }
+          .music-player-albums--item.active::after {
+            background-color: #b00000; }
     .music-player-rewind {
       border-left: 1px solid rgba(105, 105, 105, 0.3); }
     .music-player-controls {

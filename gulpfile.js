@@ -1,12 +1,3 @@
-/*  INSTALL:
-        npm i gulp browser-sync gulp-sass gulp-autoprefixer gulp-html-beautify gulp-clean-css gulp-htmlmin gulp-uglify --save-dev
-    USE:
-        DEBUG:
-            gulp
-        BUILD:
-            gulp build    
-*/
-
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
@@ -105,11 +96,11 @@ gulp.task('access', function() {
 })
 
 gulp.task('babel', function() {
-    return gulp.src([ './src/babel/*.js' ])
+    return gulp.src([ './src/babel/**/*.js' ])
         .pipe(babel())
         .pipe(gulp.dest('./src/js'))
 })
 
 gulp.task('build', ['html-build', 'css-build', 'js-build', 'img-build', 'font-build', 'access']);
 
-gulp.task('default', ['babel', 'htmlbeautify','css','sass','js','serve']);
+gulp.task('default', ['babel', 'htmlbeautify','css','sass','serve']);
