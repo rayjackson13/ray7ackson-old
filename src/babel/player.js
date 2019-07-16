@@ -1,3 +1,5 @@
+const parser = require('./parser')
+
 class Player {
     constructor(values) {
         this.element = values.element
@@ -10,10 +12,12 @@ class Player {
 
     setQueue(album) {
         this.queue = album.songs
+        this.album = album.title
     } 
 
     setTrack(index) {
         this.song = index
+        parser.setLinkReference(this.album, this.queue[index])
         this.element.setAttribute('src', this.queue[index].link)
     }
 
@@ -53,3 +57,5 @@ class Player {
         this.play()
     }
 }
+
+module.exports = Player

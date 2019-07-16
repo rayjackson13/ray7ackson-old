@@ -1396,19 +1396,454 @@ process.chdir = function (dir) {
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/process/browser.js","/../../node_modules/process")
 },{"buffer":2,"rH1JPG":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-$(document).ready(function () {
+const Player = require('./player')
+;(function() {
+    const music = [
+        {
+            title: 'Something Special',
+            date: '2017-09-23',
+            price: '7$',
+            link: 'https://rayjackson.bandcamp.com/album/something-special',
+            songs: [
+                {
+                    id: 0,
+                    idGlobal: 1,
+                    title: 'In Your Eyes',
+                    link: '/music/something_special/1.mp3'
+                },
+                {
+                    id: 1,
+                    idGlobal: 2,
+                    title: 'Something Special',
+                    link: '/music/something_special/2.mp3'
+                },
+                {
+                    id: 2,
+                    idGlobal: 3,
+                    title: 'What Am I To Say',
+                    link: '/music/something_special/3.mp3'
+                },
+                {
+                    id: 3,
+                    idGlobal: 4,
+                    title: 'Runnin\' Home To You',
+                    link: '/music/something_special/4.mp3'
+                },
+                {
+                    id: 4,
+                    idGlobal: 5,
+                    title: 'Wicked Game',
+                    link: '/music/something_special/5.mp3'
+                },
+                {
+                    id: 5,
+                    idGlobal: 6,
+                    title: 'Lost Without You',
+                    link: '/music/something_special/6.mp3'
+                },
+                {
+                    id: 6,
+                    idGlobal: 7,
+                    title: 'Кладбище Самолётов',
+                    link: '/music/something_special/7.mp3'
+                }
+            ]
+        },
+        {
+            title: 'Home - Single',
+            date: '2017-10-23',
+            price: '1$',
+            link: 'https://rayjackson.bandcamp.com/album/home-single',
+            songs: [
+                {
+                    id: 0,
+                    idGlobal: 8,
+                    title: 'Home',
+                    link: '/music/home/1.mp3'
+                }
+            ]
+        }
+    ]
+
+    const playButton = document.getElementById('audioPlay')
+    const nextButton = document.getElementById('audioNext')
+    const prevButton = document.getElementById('audioPrev')
+
+    const player = new Player({
+        element: document.getElementById('audioPlayer'),
+        playButton,
+        nextButton,
+        prevButton
+    })
+
+    const buy = {
+        price: document.getElementById('audioPrice'),
+        link: document.getElementById('audioBuy')
+    }
+
+    const listMusic = document.querySelector('.music-player-content')
+    const albumItems = document.querySelectorAll('.music-player-albums--item')
+    let currentAlbumN = 0
+    for (let albumNode of albumItems) {
+        albumNode.onclick = (e) => {
+            currentAlbumN = parseInt(e.currentTarget.getAttribute('data-album'))
+            showCurrentAlbum()
+        }
+    }
+
+    const showCurrentAlbum = () => {
+        clearMusic()
+        player.element.isPlaying && player.pause()
+        const albumNode = $(`.music-player-albums--item[data-album=${currentAlbumN}]`)[0]
+        for (let node of albumItems) {
+            node.classList.contains('active') && node.classList.remove('active')
+        }
+        albumNode.classList.add('active')
+        const currentAlbum = music[currentAlbumN]
+        buy.price.innerText = currentAlbum.price
+        buy.link.setAttribute('href', currentAlbum.link)
+
+        player.setQueue(currentAlbum)
+        fillMusic(currentAlbum.songs)
+    }
+
+    const clearMusic = () => {
+        const list = document.querySelector('.music-player-content')
+        list.innerHTML = ''
+    }
+
+    const fillMusic = (songs) => {
+        for (let song of songs) {
+            let a = document.createElement('span')
+            a.setAttribute('data-index', song.id)
+            a.classList.add('music-player-content--item')
+            listMusic.appendChild(a)
+
+            let button = document.createElement('button')
+            button.setAttribute('type', 'button')
+            button.classList.add('music-player-content--item-button')
+            button.onclick = songClick
+            a.appendChild(button)
+
+            let icon = document.createElement('i')
+            icon.classList.add('fas')
+            icon.classList.add('fa-play')
+            icon.classList.add('music-player-content--item-icon')
+            button.appendChild(icon)
+
+            let span = document.createElement('span')
+            span.classList.add('music-player-content--item-name')
+            span.innerText = song.title
+            a.appendChild(span)
+        }
+    }
+
+    const removeActive = () => {
+        for (let song of document.querySelectorAll('.music-player-content--item')) {
+            song.classList.contains('active') && song.classList.remove('active')
+        }
+    }
+
+    const songClick = (e) => {
+        const button = e.currentTarget
+        const song = button.parentElement
+        button.classList.remove('fa-play')
+        button.classList.add('fa-pause')
+        removeActive()
+        song.classList.add('active')
+        player.setTrack(song.getAttribute('data-index'))
+        player.play()
+    }
+
+    playButton.onclick = () => {
+        if (player.element.paused) {
+            if (player.element.getAttribute('src') !== null) {
+                player.play()
+            } else {
+                removeActive()
+                $(`.music-player-content--item[data-index=${ 0 }]`).addClass('active')
+                player.setTrack(0)
+                player.play()
+            }
+        } else {
+            player.pause()
+        }
+    }
+
+    nextButton.onclick = () => {
+        removeActive()
+        player.playNext()
+        if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
+            $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
+        } else {
+            player.pause()
+        }
+    }
+
+    prevButton.onclick = () => {
+        removeActive()
+        player.playPrev()
+        if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
+            $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
+        }
+    }
+
+    player.element.onended = () => {
+        removeActive()
+        player.playNext()
+        if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
+            $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
+        } else {
+            player.pause()
+        }
+    }
+
+    showCurrentAlbum()
+})();
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/audio.js","/")
+},{"./player":10,"buffer":2,"rH1JPG":4}],6:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+require('./audio');
+require('./follow');
+require('./metrics');
+require('./slider');
+require('./topper');
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_43f0ef0d.js","/")
+},{"./audio":5,"./follow":7,"./metrics":8,"./slider":11,"./topper":12,"buffer":2,"rH1JPG":4}],7:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+$(document).ready(function(){
     $follow = $('.header-follow');
     $header = $('.header-follow > .navbar');
-    $follow.waypoint(function () {
+    $follow.waypoint(function(){
         $header.addClass('fixed-top');
     }, {
-        offset: '-1px'
+        offset: '-1px',
     });
-    $follow.waypoint(function () {
+    $follow.waypoint(function(){
         $header.removeClass('fixed-top');
     }, {
-        offset: '0px'
+        offset: '0px',
     });
 });
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_325bee3.js","/")
-},{"buffer":2,"rH1JPG":4}]},{},[5])
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/follow.js","/")
+},{"buffer":2,"rH1JPG":4}],8:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+$(function() {
+    $('a[data-link').click(function(e) {
+        var attr = e.currentTarget.getAttribute('data-link');
+        if (attr === 'soundcloud') {
+            gtag('event', 'soundcloud', {
+                'event_category': 'ads'
+            });
+        } else if (attr === 'bandcamp') {
+            gtag('event', 'bandcamp', {
+                'event_category': 'ads'
+            });
+        } else if (attr === 'vk') {
+            gtag('event', 'vk', {
+                'event_category': 'ads'
+            });
+        } else if (attr === 'twitter') {
+            gtag('event', 'twitter', {
+                'event_category': 'ads'
+            });
+        } else if (attr === 'instagram') {
+            gtag('event', 'instagram', {
+                'event_category': 'ads'
+            });
+        } else if (attr === 'ss') {
+            gtag('event', 'somethingspecial', {
+                'event_category': 'music'
+            });
+        } else if (attr === 'home') {
+            gtag('event', 'home', {
+                'event_category': 'music'
+            });
+        }
+    })
+})
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/metrics.js","/")
+},{"buffer":2,"rH1JPG":4}],9:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+const getInfoString = (string) => {
+    if (typeof string !== 'string') {
+        return string
+    }
+    return string
+        .replace('-', '')
+        .replace('\'', '')
+        .split(/(\s+)/g)
+        .filter(el => el.trim().length > 0)
+        .join('-')
+}
+
+module.exports = {
+    setLinkReference: (album, song) => {
+        const { title, idGlobal: id } = song
+        const link = `?${ id }-${ getInfoString(album) }-${ getInfoString(title) }`
+        const { href } = window.location 
+        const questionIndex = href.indexOf('?')
+        let baseLink
+        if (questionIndex === -1) {
+            baseLink = href.slice(window.location.origin.length, href.length)
+            window.history.pushState(null, null, baseLink + link)
+            return
+        }
+
+        baseLink = href.slice(window.location.origin.length, questionIndex)
+        window.history.replaceState(null, null, baseLink + link)
+    },
+    
+}
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/parser.js","/")
+},{"buffer":2,"rH1JPG":4}],10:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+const parser = require('./parser')
+
+class Player {
+    constructor(values) {
+        this.element = values.element
+        this.playButton = values.playButton
+        this.nextButton = values.nextButton
+        this.prevButton = values.prevButton
+
+        this.playButton.querySelector('i.fas').classList.add('fa-play-circle')
+    }
+
+    setQueue(album) {
+        this.queue = album.songs
+        this.album = album.title
+    } 
+
+    setTrack(index) {
+        this.song = index
+        parser.setLinkReference(this.album, this.queue[index])
+        this.element.setAttribute('src', this.queue[index].link)
+    }
+
+    play() {
+        this.element.play()
+        this.playButton.removeChild(this.playButton.querySelector('svg'))
+        const icon = document.createElement('i')
+        icon.classList.add('fas')
+        icon.classList.add('fa-pause-circle')
+        this.playButton.appendChild(icon)
+    }
+
+    pause() {
+        this.element.pause()
+        this.playButton.removeChild(this.playButton.querySelector('svg'))
+        const icon = document.createElement('i')
+        icon.classList.add('fas')
+        icon.classList.add('fa-play-circle')
+        this.playButton.appendChild(icon)
+    }
+
+    playNext() {
+        this.song++
+        if (this.song < this.queue.length) {
+        this.setTrack(this.song)
+        this.play()
+        } else {
+            this.pause()
+            this.song = 0
+            this.setTrack(this.song)
+        }
+    }
+
+    playPrev() {
+        this.song--
+        this.setTrack(this.song)
+        this.play()
+    }
+}
+
+module.exports = Player
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/player.js","/")
+},{"./parser":9,"buffer":2,"rH1JPG":4}],11:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+$(document).ready(function(){
+    $('.topper-slider .slide').css('display', 'flex');
+    $('.topper-slider').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        fade: true,
+        speed: 500,
+        prevArrow: $('.topper-content .arrow-left'),
+        nextArrow: $('.topper-content .arrow-right'),
+        dots: true,
+        appendDots: $('.topper-content .dots'),
+        dotsClass: 'slider-dots',
+        autoplay: true,
+        autoplaySpeed: 2500,
+    });
+});
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/slider.js","/")
+},{"buffer":2,"rH1JPG":4}],12:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+;(function() {
+    var initializeSnow = function () {
+        var w = window.innerWidth,
+            h = window.innerHeight,
+            canvas = document.getElementById('snow'),
+            ctx = canvas.getContext('2d'),
+            rate = 50,
+            arc = 500,
+            time,
+            count,
+            size = 2,
+            speed = 10,
+            lights = new Array,
+            colors = ['#eee'];
+
+        canvas.setAttribute('width', w);
+        canvas.setAttribute('height', h);
+
+        function init() {
+            time = 0;
+            count = 0;
+
+            for (var i = 0; i < arc; i++) {
+                lights[i] = {
+                    x: Math.ceil(Math.random() * w),
+                    y: Math.ceil(Math.random() * h),
+                    toX: Math.random() * 5 + 1,
+                    toY: Math.random() * 5 + 1,
+                    c: colors[Math.floor(Math.random() * colors.length)],
+                    size: Math.random() * size
+                }
+            }
+        }
+
+        function bubble() {
+            ctx.clearRect(0, 0, w, h);
+
+            for (var i = 0; i < arc; i++) {
+                var li = lights[i];
+
+                ctx.beginPath();
+                ctx.arc(li.x, li.y, li.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = li.c;
+                ctx.fill();
+
+                li.x = li.x + li.toX * (time * 0.05);
+                li.y = li.y + li.toY * (time * 0.05);
+
+                if (li.x > w) { li.x = 0; }
+                if (li.y > h) { li.y = 0; } 
+                if (li.x < 0) { li.x = w; }
+                if (li.y < 0) { li.y = h; }
+            }
+            if (time < speed) {
+                time++;
+            }
+            timerID = setTimeout(bubble, 1000 / rate);
+        }
+        init();
+        bubble();
+    }
+
+    // initializeSnow();
+})();
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/topper.js","/")
+},{"buffer":2,"rH1JPG":4}]},{},[6])

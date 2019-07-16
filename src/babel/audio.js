@@ -1,3 +1,4 @@
+const Player = require('./player')
 ;(function() {
     const music = [
         {
@@ -8,36 +9,43 @@
             songs: [
                 {
                     id: 0,
+                    idGlobal: 1,
                     title: 'In Your Eyes',
                     link: '/music/something_special/1.mp3'
                 },
                 {
                     id: 1,
+                    idGlobal: 2,
                     title: 'Something Special',
                     link: '/music/something_special/2.mp3'
                 },
                 {
                     id: 2,
+                    idGlobal: 3,
                     title: 'What Am I To Say',
                     link: '/music/something_special/3.mp3'
                 },
                 {
                     id: 3,
+                    idGlobal: 4,
                     title: 'Runnin\' Home To You',
                     link: '/music/something_special/4.mp3'
                 },
                 {
                     id: 4,
+                    idGlobal: 5,
                     title: 'Wicked Game',
                     link: '/music/something_special/5.mp3'
                 },
                 {
                     id: 5,
+                    idGlobal: 6,
                     title: 'Lost Without You',
                     link: '/music/something_special/6.mp3'
                 },
                 {
                     id: 6,
+                    idGlobal: 7,
                     title: 'Кладбище Самолётов',
                     link: '/music/something_special/7.mp3'
                 }
@@ -51,6 +59,7 @@
             songs: [
                 {
                     id: 0,
+                    idGlobal: 8,
                     title: 'Home',
                     link: '/music/home/1.mp3'
                 }

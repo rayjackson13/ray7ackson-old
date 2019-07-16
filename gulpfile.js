@@ -8,6 +8,7 @@ var cleanCSS = require('gulp-clean-css');
 var htmlmin = require('gulp-htmlmin');
 var minifyJS = require('gulp-uglify');
 var babel = require('gulp-babel');
+var browserify = require('gulp-browserify')
  
 //Beautify HTML
 gulp.task('htmlbeautify', function() {
@@ -98,6 +99,9 @@ gulp.task('access', function() {
 gulp.task('babel', function() {
     return gulp.src([ './src/babel/**/*.js' ])
         .pipe(babel())
+        .pipe(browserify({
+            insertGlobals: true
+        }))
         .pipe(gulp.dest('./src/js'))
 })
 

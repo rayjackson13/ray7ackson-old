@@ -1396,19 +1396,35 @@ process.chdir = function (dir) {
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/process/browser.js","/../../node_modules/process")
 },{"buffer":2,"rH1JPG":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-$(document).ready(function () {
-    $follow = $('.header-follow');
-    $header = $('.header-follow > .navbar');
-    $follow.waypoint(function () {
-        $header.addClass('fixed-top');
-    }, {
-        offset: '-1px'
-    });
-    $follow.waypoint(function () {
-        $header.removeClass('fixed-top');
-    }, {
-        offset: '0px'
-    });
-});
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_325bee3.js","/")
+var getInfoString = function getInfoString(string) {
+    if (typeof string !== 'string') {
+        return string;
+    }
+    return string.replace('-', '').replace('\'', '').split(/(\s+)/g).filter(function (el) {
+        return el.trim().length > 0;
+    }).join('-');
+};
+
+module.exports = {
+    setLinkReference: function setLinkReference(album, song) {
+        var title = song.title,
+            id = song.idGlobal;
+
+        var link = '?' + id + '-' + getInfoString(album) + '-' + getInfoString(title);
+        var href = window.location.href;
+
+        var questionIndex = href.indexOf('?');
+        var baseLink = void 0;
+        if (questionIndex === -1) {
+            baseLink = href.slice(window.location.origin.length, href.length);
+            window.history.pushState(null, null, baseLink + link);
+            return;
+        }
+
+        baseLink = href.slice(window.location.origin.length, questionIndex);
+        window.history.replaceState(null, null, baseLink + link);
+    }
+
+};
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_908caf46.js","/")
 },{"buffer":2,"rH1JPG":4}]},{},[5])
