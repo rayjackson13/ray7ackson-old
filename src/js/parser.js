@@ -1396,6 +1396,9 @@ process.chdir = function (dir) {
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/process/browser.js","/../../node_modules/process")
 },{"buffer":2,"rH1JPG":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var _require = require('./music'),
+    getSongById = _require.getSongById;
+
 var getInfoString = function getInfoString(string) {
     if (typeof string !== 'string') {
         return string;
@@ -1407,6 +1410,9 @@ var getInfoString = function getInfoString(string) {
 
 module.exports = {
     setLinkReference: function setLinkReference(album, song) {
+        if (!song) {
+            return;
+        }
         var title = song.title,
             id = song.idGlobal;
 
@@ -1423,8 +1429,121 @@ module.exports = {
 
         baseLink = href.slice(window.location.origin.length, questionIndex);
         window.history.replaceState(null, null, baseLink + link);
-    }
+    },
+    parseLinkReference: function parseLinkReference() {
+        var href = window.location.href;
+        var matches = href.match(/\/\?/gi);
+        if (!matches || !matches.length) {
+            return { album: null, id: null };
+        }
 
+        var match = matches[0];
+        var query = href.slice(href.indexOf(match) + match.length, href.length);
+        var idSong = parseInt(query.split('-')[0]);
+
+        var _getSongById = getSongById(idSong),
+            album = _getSongById.album,
+            id = _getSongById.id;
+
+        return { album: album, id: id };
+    }
 };
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_908caf46.js","/")
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_714333e3.js","/")
+},{"./music":6,"buffer":2,"rH1JPG":4}],6:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+const music = [
+    {
+        idAlbum: 0,
+        title: 'Something Special',
+        date: '2017-09-23',
+        price: '7$',
+        link: 'https://rayjackson.bandcamp.com/album/something-special',
+        songs: [
+            {
+                id: 0,
+                idGlobal: 1,
+                title: 'In Your Eyes',
+                link: '/music/something_special/1.mp3'
+            },
+            {
+                id: 1,
+                idGlobal: 2,
+                title: 'Something Special',
+                link: '/music/something_special/2.mp3'
+            },
+            {
+                id: 2,
+                idGlobal: 3,
+                title: 'What Am I To Say',
+                link: '/music/something_special/3.mp3'
+            },
+            {
+                id: 3,
+                idGlobal: 4,
+                title: 'Runnin\' Home To You',
+                link: '/music/something_special/4.mp3'
+            },
+            {
+                id: 4,
+                idGlobal: 5,
+                title: 'Wicked Game',
+                link: '/music/something_special/5.mp3'
+            },
+            {
+                id: 5,
+                idGlobal: 6,
+                title: 'Lost Without You',
+                link: '/music/something_special/6.mp3'
+            },
+            {
+                id: 6,
+                idGlobal: 7,
+                title: 'Кладбище Самолётов',
+                link: '/music/something_special/7.mp3'
+            }
+        ]
+    },
+    {
+        idAlbum: 1,
+        title: 'Home - Single',
+        date: '2017-10-23',
+        price: '1$',
+        link: 'https://rayjackson.bandcamp.com/album/home-single',
+        songs: [
+            {
+                id: 0,
+                idGlobal: 8,
+                title: 'Home',
+                link: '/music/home/1.mp3'
+            }
+        ]
+    }
+]
+
+module.exports = {
+    music: music,
+    getSongById: (id) => {
+        const idSong = parseInt(id)
+        const found = music.find((val) => {
+            return val.songs.filter((song) => {
+                return song.idGlobal === idSong
+            }).length
+        })
+        if (!found) {
+            return { 
+                album: null,
+                id: null
+            } 
+        }
+        const idNew = found.songs.find((val) => {
+            return val.idGlobal === idSong
+        })['id']
+
+        return { 
+            album: found,
+            id: idNew
+        } 
+    }
+}
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/music.js","/")
 },{"buffer":2,"rH1JPG":4}]},{},[5])

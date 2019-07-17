@@ -1396,19 +1396,86 @@ process.chdir = function (dir) {
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/process/browser.js","/../../node_modules/process")
 },{"buffer":2,"rH1JPG":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-$(document).ready(function () {
-    $follow = $('.header-follow');
-    $header = $('.header-follow > .navbar');
-    $follow.waypoint(function () {
-        $header.addClass('fixed-top');
+var music = [{
+    idAlbum: 0,
+    title: 'Something Special',
+    date: '2017-09-23',
+    price: '7$',
+    link: 'https://rayjackson.bandcamp.com/album/something-special',
+    songs: [{
+        id: 0,
+        idGlobal: 1,
+        title: 'In Your Eyes',
+        link: '/music/something_special/1.mp3'
     }, {
-        offset: '-1px'
-    });
-    $follow.waypoint(function () {
-        $header.removeClass('fixed-top');
+        id: 1,
+        idGlobal: 2,
+        title: 'Something Special',
+        link: '/music/something_special/2.mp3'
     }, {
-        offset: '0px'
-    });
-});
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_f9be9c55.js","/")
+        id: 2,
+        idGlobal: 3,
+        title: 'What Am I To Say',
+        link: '/music/something_special/3.mp3'
+    }, {
+        id: 3,
+        idGlobal: 4,
+        title: 'Runnin\' Home To You',
+        link: '/music/something_special/4.mp3'
+    }, {
+        id: 4,
+        idGlobal: 5,
+        title: 'Wicked Game',
+        link: '/music/something_special/5.mp3'
+    }, {
+        id: 5,
+        idGlobal: 6,
+        title: 'Lost Without You',
+        link: '/music/something_special/6.mp3'
+    }, {
+        id: 6,
+        idGlobal: 7,
+        title: 'Кладбище Самолётов',
+        link: '/music/something_special/7.mp3'
+    }]
+}, {
+    idAlbum: 1,
+    title: 'Home - Single',
+    date: '2017-10-23',
+    price: '1$',
+    link: 'https://rayjackson.bandcamp.com/album/home-single',
+    songs: [{
+        id: 0,
+        idGlobal: 8,
+        title: 'Home',
+        link: '/music/home/1.mp3'
+    }]
+}];
+
+module.exports = {
+    music: music,
+    getSongById: function getSongById(id) {
+        var idSong = parseInt(id);
+        var found = music.find(function (val) {
+            return val.songs.filter(function (song) {
+                return song.idGlobal === idSong;
+            }).length;
+        });
+        if (!found) {
+            return {
+                album: null,
+                id: null
+            };
+        }
+        var idNew = found.songs.find(function (val) {
+            return val.idGlobal === idSong;
+        })['id'];
+
+        return {
+            album: found,
+            id: idNew
+        };
+    }
+};
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_3aca65eb.js","/")
 },{"buffer":2,"rH1JPG":4}]},{},[5])

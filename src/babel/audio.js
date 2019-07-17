@@ -1,75 +1,13 @@
 const Player = require('./player')
-;(function() {
-    const music = [
-        {
-            title: 'Something Special',
-            date: '2017-09-23',
-            price: '7$',
-            link: 'https://rayjackson.bandcamp.com/album/something-special',
-            songs: [
-                {
-                    id: 0,
-                    idGlobal: 1,
-                    title: 'In Your Eyes',
-                    link: '/music/something_special/1.mp3'
-                },
-                {
-                    id: 1,
-                    idGlobal: 2,
-                    title: 'Something Special',
-                    link: '/music/something_special/2.mp3'
-                },
-                {
-                    id: 2,
-                    idGlobal: 3,
-                    title: 'What Am I To Say',
-                    link: '/music/something_special/3.mp3'
-                },
-                {
-                    id: 3,
-                    idGlobal: 4,
-                    title: 'Runnin\' Home To You',
-                    link: '/music/something_special/4.mp3'
-                },
-                {
-                    id: 4,
-                    idGlobal: 5,
-                    title: 'Wicked Game',
-                    link: '/music/something_special/5.mp3'
-                },
-                {
-                    id: 5,
-                    idGlobal: 6,
-                    title: 'Lost Without You',
-                    link: '/music/something_special/6.mp3'
-                },
-                {
-                    id: 6,
-                    idGlobal: 7,
-                    title: 'Кладбище Самолётов',
-                    link: '/music/something_special/7.mp3'
-                }
-            ]
-        },
-        {
-            title: 'Home - Single',
-            date: '2017-10-23',
-            price: '1$',
-            link: 'https://rayjackson.bandcamp.com/album/home-single',
-            songs: [
-                {
-                    id: 0,
-                    idGlobal: 8,
-                    title: 'Home',
-                    link: '/music/home/1.mp3'
-                }
-            ]
-        }
-    ]
+const music = require('./music').music
+const parser = require('./parser')
+const scroller = require('./scroller')
 
+window.onload = () => {
     const playButton = document.getElementById('audioPlay')
     const nextButton = document.getElementById('audioNext')
     const prevButton = document.getElementById('audioPrev')
+    const { album, id } = parser.parseLinkReference()
 
     const player = new Player({
         element: document.getElementById('audioPlayer'),
@@ -85,7 +23,7 @@ const Player = require('./player')
 
     const listMusic = document.querySelector('.music-player-content')
     const albumItems = document.querySelectorAll('.music-player-albums--item')
-    let currentAlbumN = 0
+    let currentAlbumN = album && album.idAlbum || 0  
     for (let albumNode of albumItems) {
         albumNode.onclick = (e) => {
             currentAlbumN = parseInt(e.currentTarget.getAttribute('data-album'))
@@ -195,10 +133,36 @@ const Player = require('./player')
         player.playNext()
         if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
             $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
-        } else {
-            player.pause()
+            return
+        } 
+
+        player.pause()
+    }
+
+    setCurrentSong = () => {
+        if (!album || id === null) {
+            return
         }
+        player.setQueue(album)
+        player.setTrack(id)
+        const element = document.querySelector(`.music-player-content--item[data-index="${player.song}"]`)
+        if (!element) {
+            return
+        }
+        element.classList.add('active')
+        player.play()
+    }
+
+    scrollToView = () => {
+        if (!album || id === null) {
+            return
+        }
+
+        const element = document.querySelector('.music') 
+        scroller.scrollCenter(element, 250)  
     }
 
     showCurrentAlbum()
-})();
+    setTimeout(setCurrentSong, 500)
+    scrollToView() 
+}

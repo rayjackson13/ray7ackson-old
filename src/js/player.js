@@ -1410,8 +1410,6 @@ var Player = function () {
         this.playButton = values.playButton;
         this.nextButton = values.nextButton;
         this.prevButton = values.prevButton;
-
-        this.playButton.querySelector('i.fas').classList.add('fa-play-circle');
     }
 
     _createClass(Player, [{
@@ -1424,27 +1422,52 @@ var Player = function () {
         key: 'setTrack',
         value: function setTrack(index) {
             this.song = index;
-            parser.setLinkReference(this.album, this.queue[index]);
-            this.element.setAttribute('src', this.queue[index].link);
+            if (this.queue[index]) {
+                parser.setLinkReference(this.album, this.queue[index]);
+                this.element.setAttribute('src', this.queue[index].link);
+            }
         }
     }, {
         key: 'play',
         value: function play() {
-            this.element.play();
-            this.playButton.removeChild(this.playButton.querySelector('svg'));
-            var icon = document.createElement('i');
-            icon.classList.add('fas');
-            icon.classList.add('fa-pause-circle');
-            this.playButton.appendChild(icon);
+            var _this = this;
+
+            var errorAmount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+            var promise = this.element.play();
+            if (promise) {
+                promise.then(function () {
+                    if (!errorAmount) {
+                        _this.createIcon('fa-pause-circle');
+                    }
+                }).catch(function (e) {
+                    console.warn('An error occured');
+                    if (errorAmount < 3) {
+                        _this.play(errorAmount + 1);
+                        return;
+                    }
+
+                    console.warn('Your browser blocks the music from starting.\n', e);
+                    _this.createIcon('fa-play-circle');
+                });
+            }
         }
     }, {
         key: 'pause',
         value: function pause() {
             this.element.pause();
-            this.playButton.removeChild(this.playButton.querySelector('svg'));
+            this.createIcon('fa-play-circle');
+        }
+    }, {
+        key: 'createIcon',
+        value: function createIcon(className) {
+            var svg = this.playButton.querySelector('svg');
+            if (svg) {
+                this.playButton.removeChild(svg);
+            }
             var icon = document.createElement('i');
             icon.classList.add('fas');
-            icon.classList.add('fa-play-circle');
+            icon.classList.add(className);
             this.playButton.appendChild(icon);
         }
     }, {
@@ -1454,17 +1477,24 @@ var Player = function () {
             if (this.song < this.queue.length) {
                 this.setTrack(this.song);
                 this.play();
-            } else {
-                this.pause();
-                this.song = 0;
-                this.setTrack(this.song);
+                return;
             }
+            this.pause();
+            this.song = 0;
+            this.setTrack(this.song);
         }
     }, {
         key: 'playPrev',
         value: function playPrev() {
-            this.song--;
-            this.setTrack(this.song);
+            if (this.song > 0) {
+                this.song--;
+                this.setTrack(this.song);
+                this.play();
+                return;
+            }
+
+            this.song = 0;
+            this.setTrack(0);
             this.play();
         }
     }]);
@@ -1473,9 +1503,108 @@ var Player = function () {
 }();
 
 module.exports = Player;
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ce45d078.js","/")
-},{"./parser":6,"buffer":2,"rH1JPG":4}],6:[function(require,module,exports){
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_52098791.js","/")
+},{"./parser":7,"buffer":2,"rH1JPG":4}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+const music = [
+    {
+        idAlbum: 0,
+        title: 'Something Special',
+        date: '2017-09-23',
+        price: '7$',
+        link: 'https://rayjackson.bandcamp.com/album/something-special',
+        songs: [
+            {
+                id: 0,
+                idGlobal: 1,
+                title: 'In Your Eyes',
+                link: '/music/something_special/1.mp3'
+            },
+            {
+                id: 1,
+                idGlobal: 2,
+                title: 'Something Special',
+                link: '/music/something_special/2.mp3'
+            },
+            {
+                id: 2,
+                idGlobal: 3,
+                title: 'What Am I To Say',
+                link: '/music/something_special/3.mp3'
+            },
+            {
+                id: 3,
+                idGlobal: 4,
+                title: 'Runnin\' Home To You',
+                link: '/music/something_special/4.mp3'
+            },
+            {
+                id: 4,
+                idGlobal: 5,
+                title: 'Wicked Game',
+                link: '/music/something_special/5.mp3'
+            },
+            {
+                id: 5,
+                idGlobal: 6,
+                title: 'Lost Without You',
+                link: '/music/something_special/6.mp3'
+            },
+            {
+                id: 6,
+                idGlobal: 7,
+                title: 'Кладбище Самолётов',
+                link: '/music/something_special/7.mp3'
+            }
+        ]
+    },
+    {
+        idAlbum: 1,
+        title: 'Home - Single',
+        date: '2017-10-23',
+        price: '1$',
+        link: 'https://rayjackson.bandcamp.com/album/home-single',
+        songs: [
+            {
+                id: 0,
+                idGlobal: 8,
+                title: 'Home',
+                link: '/music/home/1.mp3'
+            }
+        ]
+    }
+]
+
+module.exports = {
+    music: music,
+    getSongById: (id) => {
+        const idSong = parseInt(id)
+        const found = music.find((val) => {
+            return val.songs.filter((song) => {
+                return song.idGlobal === idSong
+            }).length
+        })
+        if (!found) {
+            return { 
+                album: null,
+                id: null
+            } 
+        }
+        const idNew = found.songs.find((val) => {
+            return val.idGlobal === idSong
+        })['id']
+
+        return { 
+            album: found,
+            id: idNew
+        } 
+    }
+}
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/music.js","/")
+},{"buffer":2,"rH1JPG":4}],7:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+const { getSongById } = require('./music');
+
 const getInfoString = (string) => {
     if (typeof string !== 'string') {
         return string
@@ -1490,6 +1619,9 @@ const getInfoString = (string) => {
 
 module.exports = {
     setLinkReference: (album, song) => {
+        if (!song) {
+            return;
+        }
         const { title, idGlobal: id } = song
         const link = `?${ id }-${ getInfoString(album) }-${ getInfoString(title) }`
         const { href } = window.location 
@@ -1504,7 +1636,19 @@ module.exports = {
         baseLink = href.slice(window.location.origin.length, questionIndex)
         window.history.replaceState(null, null, baseLink + link)
     },
+    parseLinkReference: () => {
+        const href = window.location.href
+        const matches = href.match(/\/\?/gi)    
+        if (!matches || !matches.length) {
+            return { album: null, id: null}
+        }
     
+        const match = matches[0]
+        const query = href.slice(href.indexOf(match) + match.length, href.length)
+        const idSong = parseInt(query.split('-')[0])
+        const { album, id } = getSongById(idSong)
+        return { album, id }
+    }
 }
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/parser.js","/")
-},{"buffer":2,"rH1JPG":4}]},{},[5])
+},{"./music":6,"buffer":2,"rH1JPG":4}]},{},[5])

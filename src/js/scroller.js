@@ -1396,19 +1396,42 @@ process.chdir = function (dir) {
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../../node_modules/process/browser.js","/../../node_modules/process")
 },{"buffer":2,"rH1JPG":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-$(document).ready(function () {
-    $follow = $('.header-follow');
-    $header = $('.header-follow > .navbar');
-    $follow.waypoint(function () {
-        $header.addClass('fixed-top');
-    }, {
-        offset: '-1px'
-    });
-    $follow.waypoint(function () {
-        $header.removeClass('fixed-top');
-    }, {
-        offset: '0px'
-    });
-});
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_f9be9c55.js","/")
+var animationTimeout = void 0;
+
+var scrollTo = function scrollTo(to, duration) {
+    if (!duration) {
+        clearTimeout(animationTimeout);
+        return;
+    }
+
+    var difference = to - window.pageYOffset;
+    var tick = difference / duration * 10;
+
+    animationTimeout = setTimeout(function () {
+        scrollBy(tick);
+        if (window.pageYOffset === to) {
+            clearTimeout(animationTimeout);
+            return;
+        }
+
+        scrollTo(to, duration - 10);
+    }, 10);
+};
+
+var scrollBy = function scrollBy(yOffset) {
+    window.scrollBy(0, yOffset);
+};
+
+module.exports = {
+    scrollToElement: function scrollToElement(element, duration) {
+        scrollTo(element.offsetTop, duration);
+    },
+    scrollCenter: function scrollCenter(element, duration) {
+        var windowHeight = window.innerHeight;
+        var elementHeight = element.offsetHeight;
+        var top = windowHeight > elementHeight ? element.offsetTop - (windowHeight - elementHeight) / 2 : element.offsetTop;
+        scrollTo(top, duration);
+    }
+};
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_3d560b49.js","/")
 },{"buffer":2,"rH1JPG":4}]},{},[5])

@@ -1397,77 +1397,15 @@ process.chdir = function (dir) {
 },{"buffer":2,"rH1JPG":4}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 const Player = require('./player')
-;(function() {
-    const music = [
-        {
-            title: 'Something Special',
-            date: '2017-09-23',
-            price: '7$',
-            link: 'https://rayjackson.bandcamp.com/album/something-special',
-            songs: [
-                {
-                    id: 0,
-                    idGlobal: 1,
-                    title: 'In Your Eyes',
-                    link: '/music/something_special/1.mp3'
-                },
-                {
-                    id: 1,
-                    idGlobal: 2,
-                    title: 'Something Special',
-                    link: '/music/something_special/2.mp3'
-                },
-                {
-                    id: 2,
-                    idGlobal: 3,
-                    title: 'What Am I To Say',
-                    link: '/music/something_special/3.mp3'
-                },
-                {
-                    id: 3,
-                    idGlobal: 4,
-                    title: 'Runnin\' Home To You',
-                    link: '/music/something_special/4.mp3'
-                },
-                {
-                    id: 4,
-                    idGlobal: 5,
-                    title: 'Wicked Game',
-                    link: '/music/something_special/5.mp3'
-                },
-                {
-                    id: 5,
-                    idGlobal: 6,
-                    title: 'Lost Without You',
-                    link: '/music/something_special/6.mp3'
-                },
-                {
-                    id: 6,
-                    idGlobal: 7,
-                    title: 'Кладбище Самолётов',
-                    link: '/music/something_special/7.mp3'
-                }
-            ]
-        },
-        {
-            title: 'Home - Single',
-            date: '2017-10-23',
-            price: '1$',
-            link: 'https://rayjackson.bandcamp.com/album/home-single',
-            songs: [
-                {
-                    id: 0,
-                    idGlobal: 8,
-                    title: 'Home',
-                    link: '/music/home/1.mp3'
-                }
-            ]
-        }
-    ]
+const music = require('./music').music
+const parser = require('./parser')
+const scroller = require('./scroller')
 
+window.onload = () => {
     const playButton = document.getElementById('audioPlay')
     const nextButton = document.getElementById('audioNext')
     const prevButton = document.getElementById('audioPrev')
+    const { album, id } = parser.parseLinkReference()
 
     const player = new Player({
         element: document.getElementById('audioPlayer'),
@@ -1483,7 +1421,7 @@ const Player = require('./player')
 
     const listMusic = document.querySelector('.music-player-content')
     const albumItems = document.querySelectorAll('.music-player-albums--item')
-    let currentAlbumN = 0
+    let currentAlbumN = album && album.idAlbum || 0  
     for (let albumNode of albumItems) {
         albumNode.onclick = (e) => {
             currentAlbumN = parseInt(e.currentTarget.getAttribute('data-album'))
@@ -1593,23 +1531,49 @@ const Player = require('./player')
         player.playNext()
         if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
             $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
-        } else {
-            player.pause()
+            return
+        } 
+
+        player.pause()
+    }
+
+    setCurrentSong = () => {
+        if (!album || id === null) {
+            return
         }
+        player.setQueue(album)
+        player.setTrack(id)
+        const element = document.querySelector(`.music-player-content--item[data-index="${player.song}"]`)
+        if (!element) {
+            return
+        }
+        element.classList.add('active')
+        player.play()
+    }
+
+    scrollToView = () => {
+        if (!album || id === null) {
+            return
+        }
+
+        const element = document.querySelector('.music') 
+        scroller.scrollCenter(element, 250)  
     }
 
     showCurrentAlbum()
-})();
+    setTimeout(setCurrentSong, 500)
+    scrollToView() 
+}
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/audio.js","/")
-},{"./player":10,"buffer":2,"rH1JPG":4}],6:[function(require,module,exports){
+},{"./music":9,"./parser":10,"./player":11,"./scroller":12,"buffer":2,"rH1JPG":4}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 require('./audio');
 require('./follow');
 require('./metrics');
 require('./slider');
 require('./topper');
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_43f0ef0d.js","/")
-},{"./audio":5,"./follow":7,"./metrics":8,"./slider":11,"./topper":12,"buffer":2,"rH1JPG":4}],7:[function(require,module,exports){
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_6b3e6c0b.js","/")
+},{"./audio":5,"./follow":7,"./metrics":8,"./slider":13,"./topper":14,"buffer":2,"rH1JPG":4}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 $(document).ready(function(){
     $follow = $('.header-follow');
@@ -1665,6 +1629,105 @@ $(function() {
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/metrics.js","/")
 },{"buffer":2,"rH1JPG":4}],9:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+const music = [
+    {
+        idAlbum: 0,
+        title: 'Something Special',
+        date: '2017-09-23',
+        price: '7$',
+        link: 'https://rayjackson.bandcamp.com/album/something-special',
+        songs: [
+            {
+                id: 0,
+                idGlobal: 1,
+                title: 'In Your Eyes',
+                link: '/music/something_special/1.mp3'
+            },
+            {
+                id: 1,
+                idGlobal: 2,
+                title: 'Something Special',
+                link: '/music/something_special/2.mp3'
+            },
+            {
+                id: 2,
+                idGlobal: 3,
+                title: 'What Am I To Say',
+                link: '/music/something_special/3.mp3'
+            },
+            {
+                id: 3,
+                idGlobal: 4,
+                title: 'Runnin\' Home To You',
+                link: '/music/something_special/4.mp3'
+            },
+            {
+                id: 4,
+                idGlobal: 5,
+                title: 'Wicked Game',
+                link: '/music/something_special/5.mp3'
+            },
+            {
+                id: 5,
+                idGlobal: 6,
+                title: 'Lost Without You',
+                link: '/music/something_special/6.mp3'
+            },
+            {
+                id: 6,
+                idGlobal: 7,
+                title: 'Кладбище Самолётов',
+                link: '/music/something_special/7.mp3'
+            }
+        ]
+    },
+    {
+        idAlbum: 1,
+        title: 'Home - Single',
+        date: '2017-10-23',
+        price: '1$',
+        link: 'https://rayjackson.bandcamp.com/album/home-single',
+        songs: [
+            {
+                id: 0,
+                idGlobal: 8,
+                title: 'Home',
+                link: '/music/home/1.mp3'
+            }
+        ]
+    }
+]
+
+module.exports = {
+    music: music,
+    getSongById: (id) => {
+        const idSong = parseInt(id)
+        const found = music.find((val) => {
+            return val.songs.filter((song) => {
+                return song.idGlobal === idSong
+            }).length
+        })
+        if (!found) {
+            return { 
+                album: null,
+                id: null
+            } 
+        }
+        const idNew = found.songs.find((val) => {
+            return val.idGlobal === idSong
+        })['id']
+
+        return { 
+            album: found,
+            id: idNew
+        } 
+    }
+}
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/music.js","/")
+},{"buffer":2,"rH1JPG":4}],10:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+const { getSongById } = require('./music');
+
 const getInfoString = (string) => {
     if (typeof string !== 'string') {
         return string
@@ -1679,6 +1742,9 @@ const getInfoString = (string) => {
 
 module.exports = {
     setLinkReference: (album, song) => {
+        if (!song) {
+            return;
+        }
         const { title, idGlobal: id } = song
         const link = `?${ id }-${ getInfoString(album) }-${ getInfoString(title) }`
         const { href } = window.location 
@@ -1693,10 +1759,22 @@ module.exports = {
         baseLink = href.slice(window.location.origin.length, questionIndex)
         window.history.replaceState(null, null, baseLink + link)
     },
+    parseLinkReference: () => {
+        const href = window.location.href
+        const matches = href.match(/\/\?/gi)    
+        if (!matches || !matches.length) {
+            return { album: null, id: null}
+        }
     
+        const match = matches[0]
+        const query = href.slice(href.indexOf(match) + match.length, href.length)
+        const idSong = parseInt(query.split('-')[0])
+        const { album, id } = getSongById(idSong)
+        return { album, id }
+    }
 }
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/parser.js","/")
-},{"buffer":2,"rH1JPG":4}],10:[function(require,module,exports){
+},{"./music":9,"buffer":2,"rH1JPG":4}],11:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 const parser = require('./parser')
 
@@ -1706,8 +1784,6 @@ class Player {
         this.playButton = values.playButton
         this.nextButton = values.nextButton
         this.prevButton = values.prevButton
-
-        this.playButton.querySelector('i.fas').classList.add('fa-play-circle')
     }
 
     setQueue(album) {
@@ -1717,50 +1793,121 @@ class Player {
 
     setTrack(index) {
         this.song = index
-        parser.setLinkReference(this.album, this.queue[index])
-        this.element.setAttribute('src', this.queue[index].link)
+        if (this.queue[index]) {
+            parser.setLinkReference(this.album, this.queue[index])
+            this.element.setAttribute('src', this.queue[index].link)
+        }
     }
 
-    play() {
-        this.element.play()
-        this.playButton.removeChild(this.playButton.querySelector('svg'))
-        const icon = document.createElement('i')
-        icon.classList.add('fas')
-        icon.classList.add('fa-pause-circle')
-        this.playButton.appendChild(icon)
-    }
+    play(errorAmount = 0) {
+        var promise = this.element.play()
+        if (promise) {
+            promise
+                .then(() => {
+                    if (!errorAmount) {
+                        this.createIcon('fa-pause-circle')
+                    }
+                }) 
+                .catch((e) => {
+                    console.warn('An error occured') 
+                    if (errorAmount < 3) {
+                        this.play(errorAmount + 1)
+                        return
+                    }
+
+                    console.warn('Your browser blocks the music from starting.\n', e)
+                    this.createIcon('fa-play-circle')
+                })
+        }
+    } 
 
     pause() {
         this.element.pause()
-        this.playButton.removeChild(this.playButton.querySelector('svg'))
+        this.createIcon('fa-play-circle')
+    }
+
+    createIcon(className) {
+        const svg = this.playButton.querySelector('svg')
+        if (svg) {
+            this.playButton.removeChild(svg)
+        }
         const icon = document.createElement('i')
         icon.classList.add('fas')
-        icon.classList.add('fa-play-circle')
+        icon.classList.add(className)
         this.playButton.appendChild(icon)
     }
 
     playNext() {
         this.song++
         if (this.song < this.queue.length) {
-        this.setTrack(this.song)
-        this.play()
-        } else {
-            this.pause()
-            this.song = 0
             this.setTrack(this.song)
+            this.play()
+            return;
         }
+        this.pause()
+        this.song = 0
+        this.setTrack(this.song)
     }
 
     playPrev() {
-        this.song--
-        this.setTrack(this.song)
-        this.play()
+        if (this.song > 0) {
+            this.song--
+            this.setTrack(this.song)
+            this.play()
+            return
+        }
+
+        this.song = 0;
+        this.setTrack(0);
+        this.play();
     }
 }
 
 module.exports = Player
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/player.js","/")
-},{"./parser":9,"buffer":2,"rH1JPG":4}],11:[function(require,module,exports){
+},{"./parser":10,"buffer":2,"rH1JPG":4}],12:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+let animationTimeout;
+
+const scrollTo = (to, duration) => {
+    if (!duration) {
+        clearTimeout(animationTimeout);
+        return;
+    }
+
+    const difference = to - window.pageYOffset;
+    const tick = difference / duration * 10;
+
+    animationTimeout = setTimeout(() => {
+        scrollBy(tick);
+        if (window.pageYOffset === to) {
+            clearTimeout(animationTimeout);
+            return;
+        }
+
+        scrollTo(to, duration - 10)
+    }, 10);
+};
+
+const scrollBy = (yOffset) => {
+    window.scrollBy(0, yOffset);
+};
+
+module.exports = {
+    scrollToElement: (element, duration) => {
+        scrollTo(element.offsetTop, duration);
+    },
+    scrollCenter: (element, duration) => {
+        const windowHeight = window.innerHeight;
+        const elementHeight = element.offsetHeight;
+        const top = windowHeight > elementHeight 
+            ? element.offsetTop - ((windowHeight - elementHeight) / 2) 
+            : element.offsetTop;
+        scrollTo(top, duration);
+    }
+};
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/scroller.js","/")
+},{"buffer":2,"rH1JPG":4}],13:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 $(document).ready(function(){
     $('.topper-slider .slide').css('display', 'flex');
@@ -1779,7 +1926,7 @@ $(document).ready(function(){
     });
 });
 }).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/slider.js","/")
-},{"buffer":2,"rH1JPG":4}],12:[function(require,module,exports){
+},{"buffer":2,"rH1JPG":4}],14:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 ;(function() {
     var initializeSnow = function () {

@@ -1,3 +1,5 @@
+const { getSongById } = require('./music');
+
 const getInfoString = (string) => {
     if (typeof string !== 'string') {
         return string
@@ -12,6 +14,9 @@ const getInfoString = (string) => {
 
 module.exports = {
     setLinkReference: (album, song) => {
+        if (!song) {
+            return;
+        }
         const { title, idGlobal: id } = song
         const link = `?${ id }-${ getInfoString(album) }-${ getInfoString(title) }`
         const { href } = window.location 
@@ -26,5 +31,17 @@ module.exports = {
         baseLink = href.slice(window.location.origin.length, questionIndex)
         window.history.replaceState(null, null, baseLink + link)
     },
+    parseLinkReference: () => {
+        const href = window.location.href
+        const matches = href.match(/\/\?/gi)    
+        if (!matches || !matches.length) {
+            return { album: null, id: null}
+        }
     
+        const match = matches[0]
+        const query = href.slice(href.indexOf(match) + match.length, href.length)
+        const idSong = parseInt(query.split('-')[0])
+        const { album, id } = getSongById(idSong)
+        return { album, id }
+    }
 }
