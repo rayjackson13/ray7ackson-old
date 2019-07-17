@@ -287,21 +287,18 @@ button {
     .topper-slider .slick-track {
       display: -webkit-box;
       display: -ms-flexbox;
-      display: flex; }
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center; }
     .topper-slider .slide {
       -ms-flex-item-align: center;
       align-self: center;
       justify-self: center;
       -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19);
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19);
-      width: calc(100% - 20px);
-      margin-right: 10px;
-      margin-left: 10px;
       border-radius: 8px;
       overflow: hidden;
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: flex;
       display: none; }
       .topper-slider .slide .slide-left {
         overflow: hidden; }
@@ -839,6 +836,11 @@ button {
       -webkit-box-direction: normal;
       -ms-flex-direction: column;
       flex-direction: column; }
+      .topper-slider .slide.slide-portfolio {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse; }
       .topper-slider .slide .slide-img {
         max-width: 100%;
         width: 100% !important;

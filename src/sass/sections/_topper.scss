@@ -177,17 +177,14 @@
         display: flex;
         .slick-track {
             display: flex;
+            align-items: center;
         }
         .slide {
             align-self: center;
             justify-self: center;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19);
-            width: calc(100% - 20px);
-            margin-right: 10px;
-            margin-left: 10px;
             border-radius: 8px;
             overflow: hidden;
-            display: flex;
             display: none;
 
             .slide {

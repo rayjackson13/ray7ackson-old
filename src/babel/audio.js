@@ -3,7 +3,7 @@ const music = require('./music').music
 const parser = require('./parser')
 const scroller = require('./scroller')
 
-window.onload = () => {
+module.exports = () => {
     const playButton = document.getElementById('audioPlay')
     const nextButton = document.getElementById('audioNext')
     const prevButton = document.getElementById('audioPrev')
@@ -34,7 +34,7 @@ window.onload = () => {
     const showCurrentAlbum = () => {
         clearMusic()
         player.element.isPlaying && player.pause()
-        const albumNode = $(`.music-player-albums--item[data-album=${currentAlbumN}]`)[0]
+        const albumNode = document.querySelector(`.music-player-albums--item[data-album="${currentAlbumN}"]`)
         for (let node of albumItems) {
             node.classList.contains('active') && node.classList.remove('active')
         }
@@ -99,45 +99,46 @@ window.onload = () => {
         if (player.element.paused) {
             if (player.element.getAttribute('src') !== null) {
                 player.play()
-            } else {
-                removeActive()
-                $(`.music-player-content--item[data-index=${ 0 }]`).addClass('active')
+                return;
+            }
+
+            removeActive()
+            const item = document.querySelector(`.music-player-content--item[data-index="${ 0 }"]`);
+            if (item) {
+                item.classList.add('active')
                 player.setTrack(0)
                 player.play()
             }
-        } else {
-            player.pause()
+            return;
         }
+
+        player.pause()
     }
 
-    nextButton.onclick = () => {
+    const playNext = () => {
         removeActive()
         player.playNext()
-        if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
-            $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
-        } else {
-            player.pause()
-        }
-    }
-
-    prevButton.onclick = () => {
-        removeActive()
-        player.playPrev()
-        if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
-            $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
-        }
-    }
-
-    player.element.onended = () => {
-        removeActive()
-        player.playNext()
-        if ($(`.music-player-content--item[data-index=${player.song}]`).length > 0) {
-            $(`.music-player-content--item[data-index=${player.song}]`).addClass('active')
+        const item = document.querySelector(`.music-player-content--item[data-index="${player.song}"]`);
+        if (item) {
+            item.classList.add('active')
             return
         } 
 
         player.pause()
     }
+
+    nextButton.onclick = playNext
+
+    prevButton.onclick = () => {
+        removeActive()
+        player.playPrev()
+        const item = document.querySelector(`.music-player-content--item[data-index="${player.song}"]`);
+        if (item) {
+            item.classList.add('active');
+        } 
+    }
+
+    player.element.onended = playNext
 
     setCurrentSong = () => {
         if (!album || id === null) {

@@ -1,34 +1,24 @@
-$(function() {
-    $('a[data-link').click(function(e) {
-        var attr = e.currentTarget.getAttribute('data-link');
-        if (attr === 'soundcloud') {
-            gtag('event', 'soundcloud', {
+const onLinkClicked = (e) => {
+    var attr = e.currentTarget.getAttribute('data-link');
+    switch (attr) {
+        case 'soundcloud':
+        case 'bandcamp':
+        case 'vk':
+        case 'twitter':
+        case 'instagram':
+            return gtag('event', attr, {
                 'event_category': 'ads'
             });
-        } else if (attr === 'bandcamp') {
-            gtag('event', 'bandcamp', {
-                'event_category': 'ads'
-            });
-        } else if (attr === 'vk') {
-            gtag('event', 'vk', {
-                'event_category': 'ads'
-            });
-        } else if (attr === 'twitter') {
-            gtag('event', 'twitter', {
-                'event_category': 'ads'
-            });
-        } else if (attr === 'instagram') {
-            gtag('event', 'instagram', {
-                'event_category': 'ads'
-            });
-        } else if (attr === 'ss') {
-            gtag('event', 'somethingspecial', {
+        case 'ss':
+        case 'home':
+        default:
+            return gtag('event', attr, {
                 'event_category': 'music'
             });
-        } else if (attr === 'home') {
-            gtag('event', 'home', {
-                'event_category': 'music'
-            });
-        }
-    })
-})
+    }
+}
+
+module.exports = () => {
+    const buttons = document.querySelectorAll('a[data-link]');
+    buttons.forEach(btn => btn.addEventListener('click', onLinkClicked));
+}

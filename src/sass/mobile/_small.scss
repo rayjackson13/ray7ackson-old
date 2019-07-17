@@ -33,6 +33,9 @@
             max-width: calc(100% - 100px);
             .slide{
                 flex-direction: column;
+                &.slide-portfolio {
+                    flex-direction: column-reverse;
+                }
                 .slide-img{
                     max-width: 100%;
                     width: 100% !important;

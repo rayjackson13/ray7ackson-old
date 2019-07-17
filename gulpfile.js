@@ -97,8 +97,7 @@ gulp.task('access', function() {
 })
 
 gulp.task('babel', function() {
-    return gulp.src([ './src/babel/**/*.js' ])
-        .pipe(babel())
+    return gulp.src('./src/babel/index.js')
         .pipe(browserify({
             insertGlobals: true
         }))
