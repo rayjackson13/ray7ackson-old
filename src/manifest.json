@@ -1,0 +1,23 @@
+{
+    "name": "Ray Jackson Music",
+    "short_name": "Ray7ackson",
+    "icons": [{
+        "src": "/img/favicon/android-chrome-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+    }, {
+        "src": "/img/favicon/android-chrome-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+    }, {
+        "src": "/img/favicon/apple-touch-icon.png",
+        "type": "image/png",
+        "sizes": "180x180"
+    }],
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "scope": "/",
+    "theme_color": "#b00000"
+}

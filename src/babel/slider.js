@@ -12,7 +12,7 @@ module.exports = () => {
         dots: true,
         appendDots: $('.topper-content .dots'),
         dotsClass: 'slider-dots', 
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 2500,
         focusOnSelect: false,
     });

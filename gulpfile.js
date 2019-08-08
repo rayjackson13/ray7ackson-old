@@ -92,7 +92,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('access', function() {
-  return gulp.src(['./src/.htaccess'])
+  return gulp.src(['./src/.htaccess', './src/manifest.json'])
     .pipe(gulp.dest('./dist/'));
 })
 
@@ -101,6 +101,7 @@ gulp.task('babel', function() {
         .pipe(browserify({
             insertGlobals: true
         }))
+        .pipe(babel())
         .pipe(gulp.dest('./src/js'))
 })
 
