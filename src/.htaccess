@@ -1,5 +1,7 @@
 RewriteEngine on
 
+Header set Cache-Control "max-age=2628000, public"
+
 RewriteCond %{HTTP_HOST} ^rayjackson\.tk$ [NC]
 RewriteRule ^(.*)$ https://www.rayjackson.tk/$1 [R=301,L]
 

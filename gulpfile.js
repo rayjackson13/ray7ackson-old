@@ -9,6 +9,11 @@ var htmlmin = require('gulp-htmlmin');
 var minifyJS = require('gulp-uglify');
 var babel = require('gulp-babel');
 var browserify = require('gulp-browserify')
+
+var libPaths = [
+    './node_modules/bootstrap/dist/css/bootstrap.min.css',
+    './node_modules/slick-carousel/slick/slick.css'
+]
  
 //Beautify HTML
 gulp.task('htmlbeautify', function() {
@@ -92,7 +97,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('access', function() {
-  return gulp.src(['./src/.htaccess', './src/manifest.json'])
+  return gulp.src(['./src/.htaccess', './src/manifest.json', './src/sw.js'])
     .pipe(gulp.dest('./dist/'));
 })
 
@@ -105,6 +110,16 @@ gulp.task('babel', function() {
         .pipe(gulp.dest('./src/js'))
 })
 
-gulp.task('build', ['html-build', 'css-build', 'js-build', 'img-build', 'font-build', 'access']);
+gulp.task('lib', function() {
+    return gulp.src(libPaths)
+        .pipe(gulp.dest('./src/lib'))
+})
+
+gulp.task('lib-build', function() {
+    return gulp.src('./src/lib/**')
+        .pipe(gulp.dest('./dist/lib/'))
+})
+
+gulp.task('build', ['html-build', 'lib-build', 'css-build', 'js-build', 'img-build', 'font-build', 'access']);
 
 gulp.task('default', ['babel', 'htmlbeautify','css','sass','serve']);

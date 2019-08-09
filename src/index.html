@@ -23,8 +23,8 @@
     <title>Ray Jackson</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/slick.css">
 
 
     <link rel="stylesheet" href="css/style.css">
@@ -45,7 +45,7 @@
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126329991-1"></script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126329991-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -55,7 +55,7 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-126329991-1');
-    </script>
+    </script> -->
 
 </head>
 
@@ -328,19 +328,16 @@
 
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/js/sw.js').then(function(registration) {
-                    // Registration was successful
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function(err) {
-                    // registration failed :(
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
+    // Весь код регистрации у нас асинхронный.
+            navigator.serviceWorker.register('./sw.js')
+                .then(() => navigator.serviceWorker.ready.then((worker) => {
+                    worker.sync.register('syncdata');
+                }))
+                .catch((err) => console.log(err));
         }
     </script>
 
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+    <script defer src="lib/fa.min.js"></script>
     <script src="js/index.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
