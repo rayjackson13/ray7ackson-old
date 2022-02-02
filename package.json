@@ -34,5 +34,8 @@
     "build": "gulp build"
   },
   "author": "AppTech",
-  "license": "ISC"
+  "license": "ISC",
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
+  }
 }

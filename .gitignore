@@ -1,3 +1,6 @@
 node_modules
 dist
 package-lock.json
+.firebase/
+src/js/
+src/css/

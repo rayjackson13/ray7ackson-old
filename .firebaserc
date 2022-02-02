@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ray7ackson-94561"
+  },
+  "targets": {
+    "ray7ackson-94561": {
+      "hosting": {
+        "website": [
+          "ray7ackson"
+        ]
+      }
+    }
+  }
+}
