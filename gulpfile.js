@@ -17,19 +17,16 @@ var libPaths = [
  
 //Beautify HTML
 gulp.task('htmlbeautify', function() {
-  var options = {
-    indentSize: 2
-  };
   gulp.src('./src/*.html')
-    .pipe(htmlbeautify(options))
-    .pipe(gulp.dest('./src/'))
+    .pipe(htmlbeautify({ indentSize: 2 }))
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('./dist/'))
 });
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass'], function() {
-
     browserSync.init({
-        server: ['./', './src']
+        server: ['./', './dist']
     });
 
     gulp.watch(["./src/sass/*.scss", "./src/sass/**/*.scss", "./src/sass/sections/*.scss", "node_modules/bootstrap/scss/bootstrap.scss"], function (event, cb) {
@@ -42,43 +39,27 @@ gulp.task('serve', ['sass'], function() {
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    return gulp.src(["./src/sass/*.scss", "./src/sass/**/*.scss", "./src/sass/sections/*.scss", "node_modules/bootstrap/scss/bootstrap.scss"])
+    gulp.src(["./src/sass/**/*.scss", "node_modules/bootstrap/scss/bootstrap.scss"])
         .pipe(sassGlob())
         .pipe(sass())
          .pipe(autoprefixer({
              browsers: ['last 2 versions'],
              cascade: false
          }))
-        .pipe(gulp.dest("src/css"))
+        .pipe(gulp.dest("./dist/css"))
         .pipe(browserSync.stream());
 });
 
 gulp.task('css', function(){
-    return gulp.src(['src/lib/slick/slick.css', 'src/lib/chosen/chosen.css', 'src/lib/politeMask/polite.css'])
-    .pipe(gulp.dest("src/css"));
+    gulp.src(['src/lib/slick/slick.css', 'src/lib/chosen/chosen.css', 'src/lib/politeMask/polite.css'])
+    .pipe(gulp.dest("./dist/css"));
 });
 
-gulp.task('css-build', function(){
-    return gulp.src(['src/css/*.css'])
-    .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('dist/css'));
-});
+gulp.task('html-build', ['htmlbeautify']);
 
-gulp.task('html-build', function() {
-  var options = {
-    indentSize: 2
-  };
-  gulp.src('./src/*.html')
-    .pipe(htmlbeautify(options))
-    .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('./dist/'))
-});
+gulp.task('css-build', ['sass' , 'css']);
 
-gulp.task('js-build', function() {
-    return gulp.src(['./src/js/*.js'])
-        .pipe(minifyJS())
-        .pipe(gulp.dest("./dist/js"));
-});
+gulp.task('js-build', ['js', 'babel']);
 
 gulp.task('img-build', function(){
     return gulp.src(['./src/img/*', './src/img/**/*'])
@@ -92,7 +73,7 @@ gulp.task('font-build', function(){
 
 gulp.task('js', function() {
     return gulp.src(['src/js/*.js', 'src/lib/mask.js', 'src/lib/slick/slick.min.js', 'src/lib/chosen/chosen.jquery.min.js', 'src/lib/politeMask/polite.js', 'src/lib/politeMask/polite_init.js'])
-        .pipe(gulp.dest("src/js"))
+        .pipe(gulp.dest("dist/js"))
         .pipe(browserSync.stream());
 });
 
@@ -107,7 +88,7 @@ gulp.task('babel', function() {
             insertGlobals: true
         }))
         .pipe(babel())
-        .pipe(gulp.dest('./src/js'))
+        .pipe(gulp.dest('./dist/js'))
 })
 
 gulp.task('lib', function() {
@@ -123,3 +104,5 @@ gulp.task('lib-build', function() {
 gulp.task('build', ['html-build', 'lib-build', 'css-build', 'js-build', 'img-build', 'font-build', 'access']);
 
 gulp.task('default', ['babel', 'htmlbeautify','css','sass','serve']);
+
+gulp.task('serve:prod', ['build', 'serve']);

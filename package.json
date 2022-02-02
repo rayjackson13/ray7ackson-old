@@ -31,9 +31,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
+    "prod": "gulp serve:prod",
     "build": "gulp build"
   },
-  "author": "AppTech",
+  "author": "rayjackson13",
   "license": "ISC",
   "resolutions": {
     "graceful-fs": "^4.2.4"

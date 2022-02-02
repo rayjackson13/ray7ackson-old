@@ -20,11 +20,28 @@
         width: 100%;
         top: 0;
         left: 0;
-        background-image: linear-gradient(90deg, rgba(55,55,55,.25) 0%, rgba(55,55,55,0) 100%), url('/img/bg.jpeg');
+        background-image: linear-gradient(90deg, rgba(55,55,55,.25) 0%, rgba(55,55,55,0) 100%), url('/img/bg-new.jpeg');
         background-size: cover;
         background-position: center center;
         overflow: hidden;
         z-index: -1;
+    }
+
+    .attribution {
+        z-index: 100;
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        font-size: 14px;
+        color: #a2a2a2;
+        background-color: rgba(0, 0, 0, .7);
+        padding: 5px 10px;
+
+        & a {
+            color: #a2a2a2;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
     }
 
     canvas {
@@ -40,6 +57,7 @@
         height: 95px;
         padding-left: 100px;
         padding-right: 100px;
+        padding-top: 40px;
         .navbar-brand {
             font-family: acme;
             color: #fff;
@@ -58,7 +76,7 @@
                 &_item {
                     padding: 0px 10px;
                     color: #000;
-                    opacity: 0.2;
+                    opacity: 0.4;
                     font-size: 26px;
                     transition: opacity 0.125s, background-color 0.125s;
                     &:hover {
@@ -69,6 +87,13 @@
                     }
                 }
             }
+            &-divider {
+                width: 2px;
+                background-color: #000;
+                margin-left: 10px;
+                margin-right: 10px;
+                opacity: 0.4;
+            }
         }
     }
     &-content {
@@ -76,6 +101,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
     .container {
         align-items: center;
