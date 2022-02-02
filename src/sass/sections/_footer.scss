@@ -48,6 +48,13 @@
             @media #{$screen-sm} {
                 display: none;
             }
+            &-divider {
+                width: 2px;
+                background-color: #fff;
+                margin-left: 10px;
+                margin-right: 10px;
+                opacity: 0.2;
+            }
 		}
         .menu{
             display: flex;

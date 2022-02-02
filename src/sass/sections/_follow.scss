@@ -24,7 +24,7 @@
                     padding: 0px 10px;
                     height: 50px;
                     color: #000;
-                    opacity: .2;
+                    opacity: .4;
                     font-size: 22px;
                     transition: opacity .125s, background-color .125s;
                     &:hover{
@@ -35,6 +35,13 @@
                     }
                 }
 			}
+            &-divider {
+                width: 2px;
+                background-color: #000;
+                margin-left: 10px;
+                margin-right: 10px;
+                opacity: 0.4;
+            }
 		}
         .menu{
             display: flex;
