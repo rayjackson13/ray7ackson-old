@@ -26,8 +26,10 @@ gulp.task('htmlbeautify', function() {
 // Static Server + watching scss/html files
 gulp.task('serve', ['sass'], function() {
     browserSync.init({
-        server: ['./', './dist']
+        server: ['./', './dist'],
+        open: false
     });
+    browserSync.reload();
 
     gulp.watch(["./src/sass/*.scss", "./src/sass/**/*.scss", "./src/sass/sections/*.scss", "node_modules/bootstrap/scss/bootstrap.scss"], function (event, cb) {
         setTimeout(function(){ gulp.start('sass'); }, 500)
@@ -103,6 +105,4 @@ gulp.task('lib-build', function() {
 
 gulp.task('build', ['html-build', 'lib-build', 'css-build', 'js-build', 'img-build', 'font-build', 'access']);
 
-gulp.task('default', ['babel', 'htmlbeautify','css','sass','serve']);
-
-gulp.task('serve:prod', ['build', 'serve']);
+gulp.task('default', ['build', 'serve']);
