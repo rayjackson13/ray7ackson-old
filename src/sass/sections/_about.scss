@@ -4,7 +4,6 @@
 
     @media #{$screen-xs} {
         padding: 50px 0 25px;
-        
     }
 
     &-top {
@@ -16,21 +15,33 @@
         padding-bottom: 100%;
         background-image: url(../img/me.jpg);
         background-size: cover;
-        background-position: center;
+        background-position: center 40%;
         border-radius: 25px;
         box-shadow: 2px 1px 10px rgba(0,0,0,.35);
+
+        @media #{$screen-sm} {
+            width: 400px;
+            height: 400px;
+            padding-bottom: 0;
+            margin-bottom: 20px;
+        }
 
         @media #{$screen-xs} {
             width: 200px;
             height: 200px;
             padding-bottom: 0;
-            margin: 0 auto 20px;
+            margin-bottom: 20px;
             
         }
     }
 
     &-content {
+        padding-left: 20px;
         color: #ffffff;
+
+        @media #{$screen-md} {
+            padding-left: 0;
+        }
 
         &-title {
             font-size: 36px;
@@ -49,7 +60,7 @@
             line-height: 24px;
             font-family: 'Gilroy', sans-serif;
             font-weight: normal;
-            margin-bottom: 60px;
+            margin-bottom: 36px;
             @media #{$screen-xs} {
                 font-size: 20px;
                 line-height: 22px;
@@ -59,13 +70,13 @@
 
         &-text {
             font-size: 20px;
-            line-height: 24px;
+            line-height: 28px;
             font-family: 'Gilroy', sans-serif;
             margin-bottom: 10px;
 
             @media #{$screen-xs} {
                 font-size: 16px;
-                line-height: 18px;
+                line-height: 22px;
             }
 
             &.margin {
@@ -74,7 +85,6 @@
 
             &:last-child {
                 margin-bottom: 0;
-                text-align: right;
             }
 
             a {
