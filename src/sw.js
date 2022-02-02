@@ -33,9 +33,6 @@ var urlsToCache = [
     '/img/ss.jpg',
     '/index.html',
     '/js/index.js',
-    '/lib/bootstrap.min.css',
-    '/lib/fa.min.js',
-    '/lib/slick.css',
     '/manifest.json',
     '/sw.js' 
 ]

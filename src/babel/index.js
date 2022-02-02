@@ -1,3 +1,5 @@
+require('@fortawesome/fontawesome-free/js/all');
+
 const handleAudio = require('./audio');
 const handleFloatingMenu = require('./follow');
 const handleMetrics = require('./metrics');

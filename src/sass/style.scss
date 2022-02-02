@@ -1,3 +1,5 @@
+
+
 $screen-xxs: screen and (max-width: 575px);
 $screen-xs: screen and (max-width: 767px);
 $screen-sm: screen and (max-width: 991px);
@@ -21,6 +23,7 @@ $container-max-widths: (
 );
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../node_modules/slick-carousel/slick/slick.scss';
 
 @font-face {
     font-family: 'acme';

@@ -9,11 +9,6 @@ var htmlmin = require('gulp-htmlmin');
 var minifyJS = require('gulp-uglify');
 var babel = require('gulp-babel');
 var browserify = require('gulp-browserify')
-
-var libPaths = [
-    './node_modules/bootstrap/dist/css/bootstrap.min.css',
-    './node_modules/slick-carousel/slick/slick.css'
-]
  
 //Beautify HTML
 gulp.task('htmlbeautify', function() {
@@ -52,16 +47,11 @@ gulp.task('sass', function() {
         .pipe(browserSync.stream());
 });
 
-gulp.task('css', function(){
-    gulp.src(['src/lib/slick/slick.css', 'src/lib/chosen/chosen.css', 'src/lib/politeMask/polite.css'])
-    .pipe(gulp.dest("./dist/css"));
-});
-
 gulp.task('html-build', ['htmlbeautify']);
 
-gulp.task('css-build', ['sass' , 'css']);
+gulp.task('css-build', ['sass']);
 
-gulp.task('js-build', ['js', 'babel']);
+gulp.task('js-build', ['babel']);
 
 gulp.task('img-build', function(){
     return gulp.src(['./src/img/*', './src/img/**/*'])
@@ -69,15 +59,9 @@ gulp.task('img-build', function(){
 });
 
 gulp.task('font-build', function(){
-    return gulp.src(['./src/fonts/*', './src/fonts/*/*'])
+    return gulp.src(['./src/fonts/*'])
     .pipe(gulp.dest('./dist/fonts'));
 })
-
-gulp.task('js', function() {
-    return gulp.src(['src/js/*.js', 'src/lib/mask.js', 'src/lib/slick/slick.min.js', 'src/lib/chosen/chosen.jquery.min.js', 'src/lib/politeMask/polite.js', 'src/lib/politeMask/polite_init.js'])
-        .pipe(gulp.dest("dist/js"))
-        .pipe(browserSync.stream());
-});
 
 gulp.task('access', function() {
   return gulp.src(['./src/.htaccess', './src/manifest.json', './src/sw.js'])
@@ -93,16 +77,6 @@ gulp.task('babel', function() {
         .pipe(gulp.dest('./dist/js'))
 })
 
-gulp.task('lib', function() {
-    return gulp.src(libPaths)
-        .pipe(gulp.dest('./src/lib'))
-})
-
-gulp.task('lib-build', function() {
-    return gulp.src('./src/lib/**')
-        .pipe(gulp.dest('./dist/lib/'))
-})
-
-gulp.task('build', ['html-build', 'lib-build', 'css-build', 'js-build', 'img-build', 'font-build', 'access']);
+gulp.task('build', ['html-build', 'css-build', 'js-build', 'img-build', 'font-build', 'access']);
 
 gulp.task('default', ['build', 'serve']);
